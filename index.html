@@ -170,14 +170,28 @@ nav{display:flex;align-items:center;gap:10px}
 .prev{width:40px;height:40px;border-radius:10px;border:1px solid var(--line2);background:var(--panel);font-size:18px;color:var(--ink2)}
 .prev:disabled{opacity:.3}
 .main{height:42px;padding:0 18px;border-radius:10px;background:var(--or);color:#1a0d02;font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 22px -10px rgba(255,122,26,.9)}
+.cover{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px 16px;transition:opacity .35s}
+.cover.off{opacity:0;pointer-events:none}
+.cover .ck{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--or2)}
+.cover h2{font-family:var(--flap);font-size:clamp(20px,3vw,30px);font-weight:700;text-align:center;line-height:1.35;letter-spacing:-.02em}
+.cover .vid{width:min(960px,100%,calc((100vh - 230px) * 16 / 9));aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--line2);box-shadow:0 30px 80px -30px rgba(0,0,0,.9)}
+.cover .vid iframe{width:100%;height:100%;border:0;display:block}
+.cover .go{height:48px;padding:0 24px;border-radius:12px;background:var(--or);color:#1a0d02;font-weight:800;font-size:16px;box-shadow:0 10px 26px -10px rgba(255,122,26,.9)}
 </style>
 </head>
 <body>
+<div class="cover" id="cover">
+  <div class="ck">완성 영상 · 2분 52초</div>
+  <h2>민우와 떠난 세계 여행</h2>
+  <div class="vid"><iframe id="yt" src="https://www.youtube-nocookie.com/embed/8vDlwSu2_y4?rel=0&playsinline=1&enablejsapi=1" title="완성 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
+  <button class="go" id="coverGo">어떻게 만들었냐면 ›</button>
+</div>
 <div class="app">
   <header>
     <div class="mark"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></svg></div>
     <h1>숏폼 제작 흐름</h1><small>AI와 나눠 만든 2분 52초</small>
     <div class="sp"></div>
+    <button class="ib" id="vidBtn" title="완성 영상 다시 보기"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9v6l5-3z"/></svg></button>
     <button class="ib" id="sound" title="효과음"></button>
     <button class="ib" id="full" title="전체 화면"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
   </header>
@@ -510,6 +524,14 @@ addEventListener('keydown', e => {
 });
 function toggleFull() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); }
 $('full').onclick = toggleFull;
+function showCover(on) {
+  $('cover').classList.toggle('off', !on);
+  if (!on) try { $('yt').contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*'); } catch (e) {}
+}
+$('coverGo').onclick = () => { click(); showCover(false); };
+$('vidBtn').onclick = () => { click(); stopPlay(); showCover(true); };
+if (location.hash.slice(1)) showCover(false);
+
 let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { draw(); go(cur, false); }, 120); });
 draw();
 go(+(location.hash.slice(1)) || 0, false);
