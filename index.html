@@ -21,7 +21,7 @@ body{font-family:Pretendard,"Malgun Gothic",system-ui,sans-serif;font-size:15px;
   background:radial-gradient(1200px 500px at 70% -10%,rgba(255,122,26,.07),transparent 60%),var(--bg)}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 em{font-style:normal;color:var(--or2)}
-.app{height:100vh;display:grid;grid-template-rows:auto auto auto 1fr auto;gap:12px;padding:14px 28px 14px;max-width:1800px;margin:0 auto}
+.app{height:calc(100vh / var(--z,1));display:grid;grid-template-rows:auto auto auto 1fr auto;gap:12px;padding:14px 28px 14px;max-width:1800px;margin:0 auto}
 
 /* 머리줄 */
 header{display:flex;align-items:center;gap:12px;height:40px}
@@ -77,19 +77,42 @@ header small{color:var(--ink3);font-size:13px}
 .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
 .tools .card p{font-size:15.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
 .tools .card b{font-size:19px}
-.map{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 16px}
-.map button{display:grid;grid-template-columns:44px 100px 1fr;gap:10px;align-items:center;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 14px}
+.map{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 16px}
+.map button{display:grid;grid-template-columns:44px 110px 1fr;gap:10px;align-items:center;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:7px 14px}
 .map button:hover{border-color:var(--or)}
 .map .n{font-family:var(--mono);font-size:12px;color:var(--ink3)}
 .map .t{font-weight:700;font-size:16px}
 .map .d{font-size:14.5px;color:var(--ink2)}
 .map .d .chip{font-size:11.5px;padding:0 6px;margin-right:4px}
 /* 9 판 목록 */
-.vlist{display:flex;flex-direction:column;gap:8px}
-.vrow{display:grid;grid-template-columns:76px 52px 1fr;gap:12px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 14px}
+.vlist{display:flex;flex-direction:column;gap:6px}
+.vrow{display:grid;grid-template-columns:76px 52px 1fr;gap:12px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:6px 14px}
 .vrow b{font-size:15.5px}.vrow .d{font-family:var(--mono);font-size:13px;color:var(--ink3)}
 .vrow .x{font-size:15px;color:var(--ink2)}
 .vrow .x q{color:var(--ink);font-weight:600}
+/* 2 파일 격자 */
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.fcard{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;opacity:0;animation:fade .45s both}
+.fcard .ext{align-self:flex-start;padding:3px 10px}
+.fcard b{font-size:22px;letter-spacing:-.02em}
+.fcard span:last-child{font-size:17px;color:var(--ink2)}
+.punch{font-size:23px;font-weight:700;margin-top:18px;line-height:1.5}
+/* 3 크게 */
+.c2e{grid-template-columns:1fr 1fr}
+.big2 .ok li,.big2 .no li{font-size:20px;padding:10px 0}
+.big2 .no li small{font-size:15.5px}
+.big2 .lab{font-size:16px}
+.ask{font-size:17px;margin-top:14px;color:var(--ink2)}
+/* 6 탭·흐름 */
+.tabs{display:flex;gap:8px;margin-bottom:8px}
+.tabs button{padding:8px 16px;border-radius:9px;border:1px solid var(--line2);background:var(--panel2);font-size:15px;font-weight:700;color:var(--ink2)}
+.tabs button.on{background:var(--or);color:#1a0d02;border-color:var(--or)}
+.chainx{display:grid;grid-template-columns:.7fr 1fr 1fr 1fr;gap:14px;align-items:start}
+.cx img,.cx video{width:100%;aspect-ratio:16/9;max-height:150px;object-fit:cover;border-radius:8px;display:block;margin-top:8px}
+.cx .say{margin-bottom:0}
+.cx .say .q{font-size:14.5px}
+.cxh{font-size:13px;color:var(--ink3);margin-bottom:5px;margin-top:2px}
+.cx p.small{margin-top:6px}
 /* 6 프롬프트 흐름 */
 .evo{display:grid;grid-template-columns:150px 1fr 1fr 240px;gap:14px;align-items:start;margin-top:6px}
 .evo img{width:100%;border-radius:8px;display:block;background:#fff}
@@ -226,6 +249,7 @@ video{display:block;background:#000;border-radius:10px;max-width:100%}
 nav{display:flex;align-items:center;gap:10px}
 .dots2{display:flex;gap:6px;flex-wrap:wrap}
 .dots2 button{height:30px;min-width:30px;padding:0 10px;border-radius:15px;border:1px solid var(--line2);font-size:13px;color:var(--ink3);font-family:var(--mono)}
+.dots2 button:first-child{display:none}
 .dots2 button.on{background:var(--or);border-color:var(--or);color:#1a0d02;font-weight:700}
 .dots2 button.done{color:var(--ink2);border-color:rgba(255,122,26,.4)}
 .prev{width:40px;height:40px;border-radius:10px;border:1px solid var(--line2);background:var(--panel);font-size:18px;color:var(--ink2)}
@@ -246,7 +270,8 @@ nav{display:flex;align-items:center;gap:10px}
   .legend{left:10px;top:8px;font-size:11px;gap:10px}
   .screen{min-height:60vh}
   .body{padding:14px;overflow:visible}
-  .cols,.c2,.tools,.map,.evo{grid-template-columns:1fr!important;height:auto}
+  .cols,.c2,.c2e,.tools,.map,.evo,.chainx{grid-template-columns:1fr!important;height:auto}
+  .fgrid{grid-template-columns:1fr 1fr}.fcard b{font-size:18px}.fcard span:last-child{font-size:15px}.punch{font-size:19px}
   .tiles{grid-template-columns:1fr}
   .st .ws{position:static;flex-wrap:wrap;margin-bottom:4px}.st .w{font-size:10px;padding:0 4px}
   .st .n{display:none}.strip{padding-top:32px}
@@ -258,6 +283,38 @@ nav{display:flex;align-items:center;gap:10px}
   nav{position:sticky;bottom:0;background:var(--bg);padding:8px 0}
   .dots2{display:none}
 }
+/* 크게·적게 (11/26) */
+.big{font-size:24px;line-height:1.45}
+.huge{font-size:34px;font-weight:800;line-height:1.35;letter-spacing:-.02em;margin-top:8px}
+.mid{font-size:20px}
+.small{font-size:15px}
+.say .to{font-size:14px}
+.say .q{font-size:21px}
+.say.fl .q{font-size:16px}
+.cx .say .q{font-size:15.5px}
+.tools .card p{font-size:18px}
+.tools .card b{font-size:22px}
+.map .t{font-size:19px}
+.map .n{font-size:14px}
+.map button{grid-template-columns:30px 150px 1fr!important;padding:9px 16px!important}
+.doc h3{font-size:24px}
+.kv{font-size:19px;grid-template-columns:70px 1fr}
+.warn{font-size:18px}
+.big3 .dif del,.big3 .dif ins{font-size:23px;line-height:1.5}
+.big3 .dif{padding:18px 22px}
+.big3 .why{font-size:17px}
+.big3{gap:16px}
+.chain span{font-size:18px;padding:8px 14px}
+.vrow{grid-template-columns:90px 1fr!important;padding:9px 16px!important}
+.vrow b{font-size:18px}.vrow .x{font-size:18px}
+.stat2{display:grid;grid-template-columns:1fr;gap:12px;align-self:center}
+.stat2 div{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 20px;display:flex;align-items:baseline;gap:14px}
+.stat2 b{font-family:var(--flap);font-size:38px;color:var(--ink)}
+.stat2 span{font-size:18px;color:var(--ink3)}
+.tile p{font-size:16px}
+.ai-say{font-size:16px;margin-bottom:6px}
+.doc{margin-top:4px}
+@media (max-width:900px){.huge{font-size:26px}.big{font-size:20px}.say .q{font-size:18px}.big3 .dif del,.big3 .dif ins{font-size:19px}.map button{grid-template-columns:26px 1fr!important}.stat2 b{font-size:30px}}
 </style>
 </head>
 <body>
@@ -280,7 +337,6 @@ nav{display:flex;align-items:center;gap:10px}
   <div class="screen">
     <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span id="btitle"></span><span class="tag" id="btag"></span></div>
     <div class="body" id="body"></div>
-    <button class="more" id="more" onclick="moreDown()">아래에 더 있어요 ↓</button>
   </div>
 
   <nav>
@@ -313,290 +369,230 @@ const CH = { me: '나', cc: '클로드 코드', fl: 'Flow' };
 const SHORT = CH;
 const chip = k => `<span class="chip ${k}">${CH[k]}</span>`;
 // 내가 클로드 코드에 한 말
-const said = (text, when) => `<div class="say"><div class="to">${chip('me')}→ ${chip('cc')} 내가 친 말 그대로 · ${when}</div><div class="q">${text}</div></div>`;
+const said = (text, when) => `<div class="say"><div class="to">${chip('me')}→ ${chip('cc')} 내가 한 말 · ${when}</div><div class="q">${text}</div></div>`;
 // 클로드 코드가 Flow에 친 프롬프트
-const typed = (text, when) => `<div class="say fl"><div class="to">${chip('cc')}→ ${chip('fl')} 클로드 코드가 크롬으로 직접 친 프롬프트 · ${when}</div><div class="q">${text}</div></div>`;
+const typed = (text, when) => `<div class="say fl"><div class="to">${chip('cc')}→ ${chip('fl')} 프롬프트 · ${when}</div><div class="q">${text}</div></div>`;
 
 // 화면마다: kick, h(제목), p(한 줄), title(창 제목), tag(실제/재현), html(), on()(그린 뒤)
 const SC = [];
 
-const MAP = [
-  `${chip('me')}한마디 ${chip('cc')}공문 찾고 요강 정리`,
-  `${chip('me')}원래 있던 수업 자료 ${chip('cc')}폴더째 읽기`,
-  `${chip('cc')}쓸 사실·쓰면 안 될 말 정리 ${chip('me')}물음에 답`,
-  `${chip('cc')}문장마다 근거를 단 대본`,
-  `${chip('me')}참고할 유튜브 두 개 고르기`,
-  `${chip('me')}"플로우 세팅해" ${chip('cc')}도식 영상, Flow에 프롬프트 입력, 후보 고르기 ${chip('fl')}그림→영상`,
-  `${chip('cc')}컴퓨터 목소리로 먼저 이어 붙이기`,
-  `${chip('me')}녹음 ${chip('cc')}자막·장면 길이 맞추기, 음질 다듬기`,
-  `${chip('me')}"이거 고쳐" ${chip('cc')}고친 판 만들기 ×7`,
-  `${chip('cc')}제출 글 초안 ${chip('me')}확인하고 제출`,
-];
 SC[0] = {
-  kick: '전체 흐름', h: '누가 무엇을 했는지 <em>한 장</em>으로 보면',
-  p: '나는 말하고, 고르고, 녹음했습니다. 파일을 읽고 만드는 일은 클로드 코드가, 그림과 영상은 Flow가 했습니다. 칸을 누르면 그 단계로 갑니다. 말풍선은 실제로 친 말 그대로라 "어어" 같은 군말도 섞여 있습니다.',
+  kick: '전체 흐름', h: '누가 무엇을 했는지 <em>한 장</em>으로',
+  p: '칸을 누르면 그 단계로 갑니다.',
   title: '한눈에 보기', tag: ['요약', 0],
   html: () => `<div class="tools">
-      <div class="card"><b>${chip('me')}나</b><p>말로 시키기, 참고 영상·배경 곡 고르기, 내 목소리 녹음, 마지막 확인과 제출.</p></div>
-      <div class="card"><b>${chip('cc')}클로드 코드</b><p>내 컴퓨터에서 돌아가는 AI 비서. 말로 시키면 폴더 속 파일을 읽고, 글·영상 파일을 만들고, 크롬도 대신 움직입니다.</p></div>
-      <div class="card"><b>${chip('fl')}Flow</b><p>구글의 AI 영상 만들기 사이트(labs.google/flow). 글로 장면을 설명하면 그림을 그리고, 그 그림을 8초짜리 영상으로 움직입니다. AI에게 주는 이런 글 지시를 '프롬프트'라고 합니다.</p></div>
+      <div class="card"><b>${chip('me')}나</b><p>말로 시키고, 고르고, 녹음</p></div>
+      <div class="card"><b>${chip('cc')}클로드 코드</b><p>내 컴퓨터의 AI 비서. 파일을 읽고 만들고, 브라우저도 움직임</p></div>
+      <div class="card"><b>${chip('fl')}Flow</b><p>구글의 AI 그림·영상 사이트. 글로 지시(프롬프트)하면 그림과 8초 영상</p></div>
     </div>
-    <div class="map">${ST.map((s, i) => `<button data-go="${i + 1}"><span class="n">${String(i + 1).padStart(2, '0')}</span><span class="t">${s.t}</span><span class="d">${MAP[i]}</span></button>`).join('')}</div>`,
+    <div class="map">${ST.map((s, i) => `<button data-go="${i + 1}"><span class="n">${i + 1}</span><span class="t">${s.t}</span><span class="d">${s.w.map(chip).join('')}</span></button>`).join('')}</div>`,
   on: () => document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { click(); go(+b.dataset.go); }),
 };
 
 SC[1] = {
   kick: '1단계 · 공모 찾기', h: '<em>한마디</em>로 시작했습니다.',
-  p: '받은 공문 더미는 클로드 코드가 뒤져 찾고, 낼지 말지는 내가 정했습니다.',
-  title: '클로드 코드와 나눈 대화', tag: ['재현 · 말은 실제 그대로', 0],
-  html: () => `<div class="cols c2">
+  p: '공문은 클로드 코드가 찾고, 낼지는 내가 정했습니다.',
+  title: '클로드 코드와 나눈 대화', tag: ['실제 기록', 1],
+  html: () => `<div class="cols c2e">
     <div>
-      ${said('나 쇼폰 만드는 거 이거 공문 찾아가지고 공모 좀 내야 돼', '11월 10일 · 말로 입력해서 \'숏폼\'이 \'쇼폰\'으로 찍힘')}
-      <div class="ai-say">클로드 코드 · 받은 공람 문서에서 찾았어요</div>
+      ${said('숏폼 만드는 거, 공문 찾아서 공모 좀 내야 돼.', '11월 10일')}
       <div class="doc">
-        <h3>2026 디지털기반 교원역량강화연수 우수사례 동영상 공모전</h3>
+        <div class="ai-say">${chip('cc')}받은 공문에서 찾았어요</div>
+        <h3>우수사례 동영상 공모전</h3>
         <div class="kv">
-          <b>주제</b><span>연수를 통해 시작된 작지만 확실한 교실 속 변화</span>
-          <b>형식</b><span>2~3분 영상 (또는 카드뉴스 8쪽)</span>
-          <b>마감</b><span>11월 13일(금) 18:00 · 구글폼</span>
-          <b>자격</b><span>AI융합교육원 직무연수 이수자 → <em>5/10 연수로 됨</em></span>
-        </div>
-        <div class="bars">
-          <div>연계성 30<i style="width:100%"></i></div><div>구체성 30<i style="width:100%"></i></div>
-          <div>확산성 20<i style="width:66%"></i></div><div>전달력 20<i style="width:66%"></i></div>
+          <b>형식</b><span>2~3분 영상</span>
+          <b>마감</b><span>11월 13일(금)</span>
+          <b>자격</b><span>5월 10일 연수 이수 → <em>됨</em></span>
         </div>
         <div class="warn">⚠ 허위 사실이 있으면 수상 취소</div>
       </div>
     </div>
-    <div class="card" style="align-self:start">
-      <div class="lab o">이 단계에서</div>
-      <p class="big">${chip('me')}"공모 내야 돼" 한마디, 그리고 낼 공모 결정</p>
-      <p class="big" style="margin-top:12px">${chip('cc')}공문 찾기, 요강에서 마감·자격·심사 기준 뽑기, 이수 기록으로 자격 확인</p>
-      <p class="mid muted" style="margin-top:22px">마지막 줄 <b style="color:var(--or3)">"허위 사실 = 수상 취소"</b>를 보고, 영상의 모든 말에 근거를 달기로 했습니다.</p>
+    <div class="card" style="align-self:center">
+      <p class="big">마지막 줄을 보고</p>
+      <p class="huge">영상의 모든 말에<br><em>근거</em>를 달기로 했습니다.</p>
     </div>
   </div>`,
 };
 
 const FILES = [
-  ['PDF', '교수·학습 과정안', '탐구 질문 원문 · 6학년 24명 · 사회·도덕·국어 15차시'],
-  ['PPT', '공개수업 PPT', '여행 친구 "민우" 설정(4쪽) · 아이들이 따진 것(15쪽)'],
-  ['TXT', '성찰회 발표 대본 (11월 3일)', '연수에서 구글맵·구글어스 슬라이드쇼 기능을 알게 된 이야기'],
-  ['PDF', '연수 자료 65쪽', '「질문과 참여가 살아나는 구글도구 활용 수업」'],
-  ['XLS', '연수 목록', '이수 번호 · 날짜 2026.5.10. → 자격 확인'],
-  ['IMG', '학생 결과물', '구글 어스 슬라이드쇼 · 패들렛 · 캔바 보완 계획'],
+  ['PDF', '수업 과정안', '탐구 질문 · 15차시'],
+  ['PPT', '공개수업 PPT', '여행 친구 민우 설정'],
+  ['TXT', '성찰회 발표 대본', '연수 → 수업 연결 이야기'],
+  ['PDF', '연수 자료', '구글도구 활용 수업 65쪽'],
+  ['XLS', '연수 이수 목록', '5월 10일 이수 → 자격 확인'],
+  ['IMG', '학생 결과물', '구글 어스 슬라이드쇼 · 패들렛'],
 ];
 SC[2] = {
   kick: '2단계 · 재료 모으기', h: '재료는 <em>이미 폴더에</em> 있었습니다.',
-  p: '클로드 코드가 지어낸 게 아니라 내 수업 자료 폴더를 읽은 겁니다. 그래서 지어낸 말이 없습니다.',
-  title: '내 컴퓨터 · 수업 자료 폴더', tag: ['실제 파일 목록', 1],
-  html: () => `<div class="cols c2">
-    <div class="tree">${FILES.map((f, i) => `<div class="file" style="animation-delay:${i * .12}s"><span class="ext">${f[0]}</span><div><b>${f[1]}</b><span>${f[2]}</span></div></div>`).join('')}</div>
-    <div class="arrowbox">
-      <div class="card">
-        <div class="lab o">왜 중요한가</div>
-        <p class="big">${chip('me')}수업할 때 만든 자료가 내 일지 폴더에 남아 있었기 때문에, ${chip('cc')}가 <em>내 수업의 사실</em>만 가지고 대본을 쓸 수 있었습니다.</p>
-      </div>
-      <div class="quote">"구글 활용 도구 연수를 갔는데요, 거기에서 구글맵과 구글어스를 이용한 슬라이드쇼 기능을 알게 됩니다."
-        <div class="small" style="margin-top:6px">성찰회 발표 대본 → 영상의 "연수 → 수업" 연결 근거가 됨</div></div>
-      <p class="mid muted">따라 하려면: 수업 자료를 한곳에 모아 두기. 지도안, PPT, 발표 대본, 학생 결과물.</p>
-    </div>
-  </div>`,
+  p: '클로드 코드가 지어낸 게 아니라 내 수업 자료를 읽었습니다.',
+  title: '내 일지 폴더 · 수업 자료', tag: ['실제 파일', 1],
+  html: () => `<div class="fgrid">${FILES.map((f, i) => `<div class="fcard" style="animation-delay:${i * .08}s"><span class="ext">${f[0]}</span><b>${f[1]}</b><span>${f[2]}</span></div>`).join('')}</div>
+    <p class="punch">${chip('me')}수업 자료가 남아 있었고 → ${chip('cc')}가 그 사실로만 대본을 썼습니다.</p>`,
 };
 
 SC[3] = {
   kick: '3단계 · 사실 정리', h: '<em>쓰면 안 되는 말</em>부터 정리했습니다.',
-  p: '클로드 코드가 자료를 다 읽고 쓸 수 있는 사실과 쓰면 안 되는 말을 나눴습니다. 헷갈리는 건 나한테 물었습니다.',
-  title: '영상 명세서 (클로드 코드가 만든 글 파일 · 쓸 말과 뺄 말 정리)', tag: ['실제 내용', 1],
-  html: () => `<div class="cols c2">
-    <div class="card">
+  p: '클로드 코드가 자료를 읽고 나눴고, 헷갈리는 건 나한테 물었습니다.',
+  title: '영상 명세서 (클로드 코드가 만든 정리 파일)', tag: ['실제 내용', 1],
+  html: () => `<div class="cols c2e">
+    <div class="card big2">
       <div class="lab o">쓰면 안 되는 말</div>
       <ul class="no">
-        <li>"구글 어스를 연수에서 처음 알았다"<small>4월 30일 PPT에 이미 구글 어스가 있음 → 연수에서 얻은 건 '슬라이드쇼로 여행 계획 짜기'로만 말함</small></li>
-        <li>"○차시 수업에서…"<small>과정안 안에서도 8차시·11차시가 엇갈림 → 날짜(6월 16일)로만 말함</small></li>
-        <li>방탈출의 캐릭터 이름<small>저작권 → "구글 폼으로 방탈출을 만들었고"까지만</small></li>
-        <li>학생 얼굴·이름·목소리<small>실제 사진은 꼭 필요한 순간만, 흐리게</small></li>
+        <li>"연수에서 구글 어스를 처음 알았다"<small>4월 PPT에 이미 있음</small></li>
+        <li>"○차시 수업에서…"<small>자료마다 차시가 달라 날짜로만</small></li>
+        <li>방탈출 캐릭터 이름<small>저작권</small></li>
+        <li>학생 얼굴·이름·목소리<small>사진은 꼭 필요할 때만, 흐리게</small></li>
       </ul>
     </div>
-    <div class="card">
+    <div class="card big2">
       <div class="lab o">쓸 수 있는 사실</div>
       <ul class="ok">
-        <li>연수 2026.5.10. 구글코리아, 6시간</li>
-        <li>탐구 질문 원문 그대로</li>
-        <li>민우: 13살, 휠체어, 사진 찍기·맛있는 음식 좋아함</li>
+        <li>연수: 2026년 5월 10일, 6시간</li>
+        <li>민우: 13살, 휠체어, 사진 찍기 좋아함</li>
         <li>여행지: 런던 · 파리 · 오사카</li>
-        <li>설문 9명 → 12명</li>
+        <li>설문: 9명 → 12명</li>
       </ul>
-      <div class="lab" style="margin-top:18px">${chip('cc')}가 나에게 물은 것</div>
-      <p class="mid muted">민우 나이는? 방탈출은 무슨 과목? 6모둠 여행지는? → ${chip('me')}내가 답한 것만 대본에 들어감</p>
+      <p class="ask">${chip('cc')}"민우 나이는?" "6모둠 여행지는?" → ${chip('me')}내가 답한 것만 씀</p>
     </div>
   </div>`,
 };
 
 SC[4] = {
   kick: '4단계 · 대본', h: '문장마다 <em>근거</em>를 달았습니다.',
-  p: '클로드 코드가 초안을 쓰고, 근거 없는 말은 스스로 고쳤습니다. 바꾼 문장 16곳과 그 이유까지 남겼습니다.',
-  title: '대본 (클로드 코드가 만든 글 파일) · 초안과 확정본', tag: ['실제 내용', 1],
-  html: () => `<div class="cols c2">
-    <div class="diff">
-      <div class="dif"><div class="s">장면 3</div>
-        <del>아이들이 제일 먼저 찾은 건 맛집도, 관광지도 아니었습니다. 엘리베이터와 경사로였죠.</del>
-        <ins>아이들이 여행지마다 따진 건 따로 있었습니다. 엘리베이터와 장애인 화장실, 그리고 휠체어로 갈 수 있는지였죠.</ins>
-        <div class="why">"제일 먼저"와 "경사로"는 자료에 없음 → PPT 15쪽 목록으로</div></div>
-      <div class="dif"><div class="s">장면 1</div>
+  p: '클로드 코드가 쓰고, 근거 없는 말은 스스로 고쳤습니다. 고친 문장 16곳.',
+  title: '대본 · 고치기 전과 후', tag: ['실제 내용', 1],
+  html: () => `<div class="diff big3">
+      <div class="dif">
+        <del>아이들이 제일 먼저 찾은 건 엘리베이터와 경사로였죠.</del>
+        <ins>아이들이 여행지마다 따진 건 엘리베이터, 장애인 화장실, 휠체어로 갈 수 있는지였죠.</ins>
+        <div class="why">"제일 먼저", "경사로"는 자료에 없음</div></div>
+      <div class="dif">
         <del>우리 반 아이들이 이번 학기에 함께 여행한 친구</del>
         <ins>우리 반 24명이 올해 함께 여행한 친구</ins>
-        <div class="why">수업은 1학기, 제출은 11월 → "이번 학기"는 틀린 말</div></div>
-      <div class="dif"><div class="s">장면 11</div>
-        <del>아이들은 서로의 여행을 민우의 눈으로 봤습니다</del>
-        <ins>아이들은 교실을 돌며 서로의 여행 계획을 살폈습니다</ins>
-        <div class="why">"민우의 눈으로"는 근거 없는 해석이라, 교실을 돌며 서로 살펴본 활동(갤러리워크)이라는 사실로 고침</div></div>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="lab o">대본 속 모습 · 회색 줄은 문장마다 단 근거 메모</div>
-      <div class="code"><span class="k">장면 1</span> · 0:00–0:06.8 · 큰 자막: 13살, 휠체어를 타는 민우
-- 13살, 휠체어를 타는 민우.
-  <span class="c">&lt;!-- 근거: 명세 25줄 "민우 (13세) 휠체어를 사용해요" --&gt;</span>
-- 우리 반 24명이 올해 함께 여행한 친구입니다.
-  <span class="c">&lt;!-- 근거: 명세 24줄 "6학년 3반 24명" --&gt;</span></div>
-      <p class="mid muted">근거 메모는 영상에 나오지 않습니다. 말이 사실인지 확인하는 용도입니다. "명세 25줄"은 3단계 정리 파일의 25번째 줄이라는 뜻입니다.</p>
-    </div>
-  </div>`,
+        <div class="why">수업은 1학기, 제출은 11월</div></div>
+    </div>`,
 };
 
 SC[5] = {
   kick: '5단계 · 느낌 정하기', h: '<em>말투</em>와 <em>그림</em>은 내가 골랐습니다.',
-  p: '참고할 유튜브 두 개를 골라 "이 느낌으로"라고 했습니다. 말은 정보 다큐(서재로36), 그림은 어두운 3D 다큐(신비한 건축사전).',
-  title: '참고 영상의 느낌으로 만든 완성 영상 장면', tag: ['실제 장면', 1],
-  html: () => `<div class="cols c2">
+  p: '참고할 유튜브 두 개를 골라 "이 느낌으로".',
+  title: '참고 영상의 느낌으로 만든 장면', tag: ['실제 장면', 1],
+  html: () => `<div class="cols c2e">
     <div class="frames">
       <img class="wide" src="img/f3.jpg" alt="">
       <img src="img/f55.jpg" alt=""><img src="img/f60.jpg" alt="">
     </div>
-    <div class="card" style="align-self:start">
-      <p class="small" style="margin-bottom:6px">클로드 코드가 참고 영상을 보고 어두운 3D 느낌을 제안하자 한 대답</p>${said('ㅇㅇ 신비한 건축 느낌으로 어어.', '11월 11일 새벽')}
-      <div class="lab o">말투</div>
-      <p class="mid">숫자와 질문으로 열고, 담담하게. → "13살, 휠체어를 타는 민우."</p>
-      <div class="lab o" style="margin-top:16px">그림 · 참고 영상에서 뽑은 다섯 가지</div>
-      <div class="rule"><b>①</b><span>어둡고 따뜻한 화면, 부드러운 빛, 옅은 먼지</span></div>
-      <div class="rule"><b>②</b><span>원리를 빛나는 주황 선이 흐르며 그림</span></div>
-      <div class="rule"><b>③</b><span>검은 바탕에 크고 굵은 흰 글씨</span></div>
-      <div class="rule"><b>④</b><span>하단 작은 흰 자막</span></div>
-      <div class="rule"><b>⑤</b><span>천천히 다가가는 카메라</span></div>
-      <p class="small" style="margin-top:12px">금지: 밝은 인포그래픽, 파스텔, 귀여운 아이콘, 튀는 효과. 이 규칙이 다음 단계 Flow 프롬프트에 그대로 들어갑니다.</p>
+    <div style="display:flex;flex-direction:column;gap:16px;justify-content:center">
+      <div class="card"><div class="lab o">말투</div><p class="big">정보 다큐 채널처럼<br>숫자로 열고, 담담하게</p></div>
+      <div class="card"><div class="lab o">그림</div><p class="big">어두운 3D 다큐처럼<br>따뜻한 빛, 빛나는 선</p></div>
+      ${said('응, 신비한 건축 느낌으로 가자.', '11월 11일 새벽')}
     </div>
   </div>`,
 };
 
 SC[6] = {
   kick: '6단계 · 장면 만들기', h: '그림·영상은 <em>Flow</em>, 프롬프트 입력은 <em>클로드 코드</em>.',
-  p: '나는 "플로우 세팅하고"라고 하고 Flow 첫 화면 동의만 눌렀습니다. 클로드 코드가 브라우저로 Flow를 열고 프롬프트를 직접 쳤습니다. 동화책 그림체로 시작했다가 3D로 바꿨습니다. 그림 후보 고르기, 도식과 글씨도 클로드 코드가 했습니다.',
+  p: '나는 "Flow 세팅해 줘" 한마디. 프롬프트 입력, 후보 고르기, 도식·글씨는 클로드 코드가 했습니다.',
   title: '장면이 만들어지는 길', tag: ['실제 기록', 1],
-  html: () => `
-  ${said('야 공모전 영상 마저 만들자. 1 플로우 이런 세팅 하고 …', '11월 11일 0시 53분')}
-  <div class="evo">
-    <div><img src="img/minwoo_ref.png" alt="수업 때 만든 민우 그림"><p class="small" style="margin-top:6px">처음 넣은 민우 그림 (수업 때 제미나이로 만든 캐릭터)</p></div>
-    ${typed('첨부한 민우 그림과 똑같은 캐릭터, 똑같은 그림체(따뜻한 동화책 일러스트, 굵은 외곽선)로 16:9 이미지를 1장 만들어 줘. 장면: 초록 후드티를 입고 휠체어에 앉은 13살 남자아이 민우가 화면 가운데에서 정면을 보며 살짝 웃고 있다. … 글자, 말풍선, 로고는 절대 넣지 마.', '1시 4분')}
-    ${typed('그림체를 완전히 바꾸자. 동화책 그림체 말고, 어둡고 따뜻한 조명의 시네마틱 3D 렌더(… 깊은 그림자, 부드러운 빛줄기, 공기 중 먼지 입자 …)로 … (1) 검은 공간, 위에서 내려오는 따뜻한 빛줄기 하나 아래 휠체어에 앉은 13살 한국 남자아이 … 정면, 차분한 미소.', '1시 13분')}
-    <div><img src="img/s01_3d.jpg" alt="3D로 바꾼 민우"><p class="small" style="margin-top:6px">위 프롬프트로 나온 3D 그림 (동화책 그림체는 버림)</p></div>
+  html: () => `<div class="tabs"><button data-tab="0" class="on">민우 장면이 만들어진 길</button><button data-tab="1">장면 16개 나눠 만들기</button></div>
+  <div data-pane="0">
+    ${said('공모전 영상 마저 만들자. Flow 세팅부터 해 줘.', '11월 11일 새벽')}
+    <div class="chainx">
+      <div class="cx"><div class="cxh">넣은 그림</div><img src="img/minwoo_ref.png" alt="" style="background:#fff;object-fit:contain"><p class="small">수업 때 제미나이로 만든 민우</p></div>
+      <div class="cx">${typed('첨부한 민우 그림과 똑같은 캐릭터, 따뜻한 동화책 그림체로 16:9 그림 1장. 휠체어에 앉아 정면을 보며 웃는 민우. 글자 넣지 마.', '1:04')}<p class="small">→ 이 그림체는 버림</p></div>
+      <div class="cx">${typed('그림체를 바꾸자. 어둡고 따뜻한 조명의 시네마틱 3D. 위에서 내려오는 빛줄기 아래 휠체어에 앉은 민우, 차분한 미소.', '1:13')}<img src="img/s01_3d.jpg" alt=""></div>
+      <div class="cx">${typed('이 그림을 첫 장면으로 8초 영상. 카메라가 천천히 다가가고, 빛 속 먼지가 떠다니고, 민우가 살짝 미소.', '1:16')}<video src="clip/flow01.mp4" muted loop autoplay playsinline></video></div>
+    </div>
+    <p class="small" style="margin-top:8px">파란 칸 = 클로드 코드가 브라우저로 Flow에 친 프롬프트 (길어서 줄임) · 16:9 = 가로 화면 · 8초 영상은 Flow 안의 Veo가 만듦</p>
   </div>
-  <div class="cols c2" style="height:auto;margin-top:14px;align-items:center">
-    ${typed('좋아, 이 그림체가 딱 맞아. 방금 만든 3D 이미지 3장을 각각 첫 프레임으로 써서 16:9 동영상 클립 3개를 만들어 줘 (Veo 3.1 Lite, 각 8초 …). 움직임은 아주 느리고 단순하게, 얼굴·손 모양이 바뀌지 않게. … (1) 민우 빛줄기 장면: 카메라가 천천히 앞으로 다가가고, 먼지 입자가 빛 속에서 떠다니며, 민우가 살짝 고개를 들고 미소 짓는다.', '1시 16분')}
-    <div><video src="clip/flow01.mp4" muted loop autoplay playsinline style="width:100%"></video><p class="small" style="margin-top:6px">${chip('fl')}그렇게 나온 8초 클립 (장면 1)</p><p class="small" style="margin-top:4px">Veo = Flow 안에서 영상을 만드는 AI · 16:9 = 가로 화면 · 첫 프레임 = 영상의 첫 장면 그림</p></div>
-  </div>
-  <div class="lab o" style="margin-top:22px">장면 16개는 이렇게 나눠 만들었습니다</div>
-  <div class="tiles">
-    <div class="tile"><div class="lab">${chip('cc')}코드로 그린 도식</div>
-      <video src="clip/scene06.mp4" muted loop autoplay playsinline></video>
-      <p>장면 6. 빛나는 선이 연수에서 배운 순서를 그림. 클로드 코드가 움직이는 그림을 코드로 짜고 영상 파일로 바꿈</p></div>
-    <div class="tile pick"><div class="lab">${chip('cc')}Flow 그림 후보에서 고르기</div>
-      <div class="pk"><div class="no"><img src="img/c_09_민우_1.jpg" alt=""></div><div class="yes"><img src="img/c_09_민우_2.jpg" alt=""></div></div>
-      <p>장면 3·9·13·15는 후보를 2~4장씩 뽑아 클로드 코드가 고름. 인물은 처음 민우 그림을 기준으로</p></div>
-    <div class="tile"><div class="lab">${chip('fl')}고른 그림을 영상으로</div>
-      <video src="clip/flow09.mp4" muted loop autoplay playsinline></video>
-      <p>8초짜리 클립. 무료로는 하루에 만들 수 있는 양(크레딧 50)이 정해져 있어 하루에 몇 개씩</p></div>
-    <div class="tile"><div class="lab">${chip('cc')}글씨·자막과 합치기</div>
-      <img src="img/f76.jpg" alt="">
-      <p>클립 위에 큰 제목과 민우 설명 글씨를 얹어 장면 완성</p></div>
-  </div>
-  <p class="mid muted" style="margin-top:22px">실제 수업 사진은 꼭 필요한 순간(공개수업, 학습지)에만, 얼굴은 흐리게. 학생 사진은 AI에 넣지 않았습니다.</p>`,
+  <div data-pane="1" hidden>
+    <div class="tiles">
+      <div class="tile"><div class="lab">${chip('cc')}코드로 그린 도식</div>
+        <video src="clip/scene06.mp4" muted loop autoplay playsinline></video>
+        <p>연수에서 배운 순서를 빛나는 선으로. 코드로 짜서 영상 파일로</p></div>
+      <div class="tile pick"><div class="lab">${chip('cc')}Flow 후보에서 고르기</div>
+        <div class="pk"><div class="no"><img src="img/c_09_민우_1.jpg" alt=""></div><div class="yes"><img src="img/c_09_민우_2.jpg" alt=""></div></div>
+        <p>장면 3·9·13·15는 2~4장씩 뽑아 고름</p></div>
+      <div class="tile"><div class="lab">${chip('fl')}고른 그림을 영상으로</div>
+        <video src="clip/flow09.mp4" muted loop autoplay playsinline></video>
+        <p>8초 클립. 무료는 하루에 만들 수 있는 양이 정해져 있어 하루에 몇 개씩</p></div>
+      <div class="tile"><div class="lab">${chip('cc')}글씨·자막과 합치기</div>
+        <img src="img/f76.jpg" alt="">
+        <p>클립 위에 제목과 설명 글씨를 얹어 완성</p></div>
+    </div>
+    <p class="mid muted" style="margin-top:18px">실제 수업 사진은 꼭 필요한 순간에만, 얼굴은 흐리게. 학생 사진은 AI에 넣지 않았습니다.</p>
+  </div>`,
+  on: () => document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => {
+    click();
+    document.querySelectorAll('[data-tab]').forEach(x => x.classList.toggle('on', x === b));
+    document.querySelectorAll('[data-pane]').forEach(x => x.hidden = x.dataset.pane !== b.dataset.tab);
+  }),
 };
 
 const TIMES = [6.8, 5.9, 11.9, 3.0, 10.0, 16.6, 3.0, 5.4, 13.1, 15.7, 14.0, 3.5, 9.2, 7.2, 17.9, 13.4];
 const EPS = { 4: 'EP1', 7: 'EP2', 12: 'EP3' };
 SC[7] = {
-  kick: '7단계 · 미리 붙여 보기', h: '녹음하기 전에 <em>컴퓨터 목소리로 먼저</em> 붙여 봤습니다.',
-  p: '클로드 코드가 TTS(글을 읽어 주는 컴퓨터 목소리)로 2분 36초짜리 임시 영상을 만들었습니다. 장면 길이와 박자를 여기서 미리 맞췄습니다. 아래 영상은 그중 앞 12초입니다.',
-  title: '미리 붙여 본 영상 · 앞 12초 · 컴퓨터 목소리', tag: ['실제 영상', 1],
-  html: () => `<div style="display:flex;flex-direction:column;height:100%;min-height:0">
-    ${said('… 2 워크플로 돌려서 개빡세게 만들어보자 어어', '11월 11일 0시 53분 · 워크플로 = 클로드 코드가 여러 AI 일꾼을 한꺼번에 돌리는 기능')}
+  kick: '7단계 · 미리 붙여 보기', h: '녹음 전에 <em>컴퓨터 목소리로</em> 먼저 붙였습니다.',
+  p: '장면 길이와 박자를 여기서 맞췄습니다. (영상은 앞 12초)',
+  title: '미리 붙여 본 영상 · 컴퓨터 목소리', tag: ['실제 영상', 1],
+  html: () => `<div style="display:flex;flex-direction:column;height:100%;min-height:0;gap:10px">
+    ${said('워크플로 돌려서 제대로 만들어 보자.', '11월 11일 새벽 · 워크플로 = 여러 AI를 한꺼번에 돌리는 기능')}
     <div style="flex:1;min-height:0"><video class="vfill" src="clip/gajorip.mp4" controls preload="metadata"></video></div>
-    <div class="tl">${TIMES.map((d, i) => `<div class="${EPS[i + 1] ? 'ep' : ''}" style="flex:${d};animation-delay:${i * .05}s" title="장면 ${i + 1} · ${d}초">${EPS[i + 1] || i + 1}</div>`).join('')}</div>
-    <div class="tlax"><span>0:00</span><span>칸 = 장면 16개 · EP = 큰 제목 장면(연수·질문·변화) · 자막 39줄</span><span>2:36.6</span></div></div>`,
+    <div class="tl">${TIMES.map((d, i) => `<div class="${EPS[i + 1] ? 'ep' : ''}" style="flex:${d};animation-delay:${i * .05}s">${EPS[i + 1] || i + 1}</div>`).join('')}</div>
+    <div class="tlax"><span>0:00</span><span>장면 16개 · EP = 큰 제목 장면</span><span>2:36</span></div></div>`,
 };
 
 SC[8] = {
   kick: '8단계 · 내 목소리', h: '녹음은 <em>내 목소리</em>로 직접 했습니다.',
-  p: '나는 대본을 읽어 녹음만 했습니다. 클로드 코드가 받아쓰기로 문장마다 시각을 찾아 자막과 장면 길이를 내 말에 맞췄습니다.',
+  p: '클로드 코드가 내 말에 맞춰 자막과 장면 길이를 다시 맞췄습니다.',
   title: '내 녹음 → 자막·음질', tag: ['실제 기록', 1],
-  html: () => `<div class="cols c2">
-    <div>
-      ${said('야 녹음본 다시줄게 잘 해줘봐 어어 일단 그 대본띄워봐', '11월 12일 밤')}
-      ${said('5번으로 가자. 파열음 뿐만아니라 음질 좀 만져줄수있음? 너무 날것 어어', '11월 12일 밤')}
-      <p class="mid muted" style="margin-top:6px">${chip('me')}코맹맹이·파열음이 거슬려서 마이크와 거리를 두고 다시 녹음했습니다.</p>
+  html: () => `<div class="cols c2e">
+    <div style="display:flex;flex-direction:column;justify-content:center">
+      ${said('녹음본 다시 줄게. 대본부터 띄워 줘.', '11월 12일 밤')}
+      ${said('음질도 다듬어 줄 수 있어? 너무 날것이야.', '11월 12일 밤')}
     </div>
-    <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="card"><div class="lab o">${chip('cc')}가 맞춘 것</div>
-        <div class="chain"><span>내 녹음</span><i>→</i><span>받아쓰기</span><i>→</i><span>문장마다 시각</span><i>→</i><span>자막·장면 길이 맞춤</span></div>
-        <p class="small" style="margin-top:8px">자막과 말소리 차이 0.07초 안. 0.7초 넘게 쉰 곳은 0.7초로 줄여 3분 안에 맞춤</p></div>
-      <div class="card"><div class="lab o">${chip('cc')}목소리 다듬기</div>
-        <div class="chain"><span>잡음 제거</span><i>→</i><span>파열음 줄이기</span><i>→</i><span>따뜻하게·또렷하게</span><i>→</i><span>크기 고르게</span><i>→</i><span>작은 방 울림</span></div></div>
+    <div style="display:flex;flex-direction:column;gap:14px;justify-content:center">
+      <div class="card"><div class="lab o">${chip('cc')}맞춘 것</div>
+        <div class="chain"><span>내 녹음</span><i>→</i><span>받아쓰기</span><i>→</i><span>자막·장면 길이</span></div></div>
+      <div class="card"><div class="lab o">${chip('cc')}다듬은 것</div>
+        <div class="chain"><span>잡음</span><i>→</i><span>파열음</span><i>→</i><span>크기 고르게</span></div></div>
     </div>
   </div>`,
 };
 
 const VERS = [
-  ['임시 영상', '2:36', '컴퓨터 목소리로 박자 맞춤'],
-  ['녹음 1', '2:44', '첫 녹음. 틀린 곳 3군데 잘라 냄'],
-  ['녹음 2', '2:43', '헛기침 잘라 냄, 클로드 코드가 만든 피아노 배경음'],
-  ['녹음 3', '2:52', '내가 다시 녹음(3:08을 쉰 곳 줄여 2:52로), 클로드 코드가 곡 4개 맛보기'],
-  ['녹음 4', '2:52', '<q>좀 파열음이 큰데? 음악 더 키우고 내 음량 줄여</q> → 활기찬 곡 4개 중 내가 5번 고름, 목소리 다듬기'],
-  ['녹음 5', '2:52', '장면 7에 Flow 클립(칠판 물음표) 넣음 → 첫 제출'],
-  ['수정', '2:52', '곡이 짧게 반복돼서 → 곡 바꿈'],
-  ['수정 2', '2:52', '곡이 너무 슬퍼서 → 밝은 곡으로 바꿔 다시 제출'],
+  ['녹음 1', '첫 녹음, 틀린 곳 잘라 냄'],
+  ['녹음 2', '헛기침 잘라 냄, 피아노 배경음'],
+  ['녹음 3', '다시 녹음, 곡 맛보기 4개'],
+  ['녹음 4', '음악 키우고 목소리 줄임, 곡 5번'],
+  ['녹음 5', 'Flow 장면 하나 더 → 첫 제출'],
+  ['수정', '곡이 짧게 반복돼서 곡 바꿈'],
+  ['수정 2', '곡이 너무 슬퍼서 밝은 곡으로'],
 ];
 SC[9] = {
-  kick: '9단계 · 고치기', h: '임시 영상 뒤로 <em>일곱 번</em> 고쳐 만들었습니다.',
-  p: '고칠 점은 내가 말로 하고, 고치는 건 클로드 코드가 했습니다.',
+  kick: '9단계 · 고치기', h: '<em>일곱 번</em> 고쳐 만들었습니다.',
+  p: '고칠 점은 내가 말하고, 고치는 건 클로드 코드가 했습니다.',
   title: '버전마다 바뀐 것', tag: ['실제 기록', 1],
-  html: () => `<div class="cols c2">
-    <div class="vlist"><div class="vrow" style="background:none;border:0;padding:0 14px"><span class="small">버전</span><span class="small">길이</span><span class="small">바뀐 것 (따옴표 = 내가 한 말)</span></div>${VERS.map(x => `<div class="vrow"><b>${x[0]}</b><span class="d">${x[1]}</span><span class="x">${x[2]}</span></div>`).join('')}
-      <p class="small" style="margin-top:6px">11월 12일 오후 ~ 13일 오전. 한 번 낸 뒤 곡만 바꿔 다시 냄</p></div>
-    <div class="card" style="align-self:start">
-      <div class="lab o">고칠 때 한 말은 이 정도입니다</div>
-      ${said('좀 파열음이 큰데? 음악 더 키우고 내 음량 줄여 어어 음악이 너무 잔잔해 좀더 느좋 활기찬 느낌? 어쿠스틱정도 바이브?', '11월 12일 밤')}
-      ${said('야 좋은데 분량 넘친거 아니냐? 어 한번 검증하고', '11월 12일 밤')}
-      <p class="mid muted">${chip('cc')}음악 크기·곡·길이를 바꾼 새 판을 만들고, 3분을 넘지 않는지 재서 알려 줌</p>
+  html: () => `<div class="cols c2e">
+    <div class="vlist">${VERS.map(x => `<div class="vrow"><b>${x[0]}</b><span class="x">${x[1]}</span></div>`).join('')}</div>
+    <div style="display:flex;flex-direction:column;justify-content:center">
+      <div class="lab o">고칠 때 한 말은 이 정도</div>
+      ${said('파열음이 좀 큰데? 음악은 키우고 내 목소리는 줄여 줘.', '11월 12일 밤')}
+      ${said('좋은데 분량 넘친 거 아니야? 한번 확인해 줘.', '11월 12일 밤')}
     </div>
   </div>`,
 };
 
 SC[10] = {
   kick: '10단계 · 제출', h: '제출 글도 <em>초안은 클로드 코드</em>가.',
-  p: '구글폼 칸에 넣을 글을 대본·명세서에서 뽑아 초안으로 받고, 연락처·동의 칸과 제출 버튼은 내가 직접 했습니다.',
-  title: '제출 폼 글.txt (초안)', tag: ['실제 내용', 1],
-  html: () => `<div class="cols c2">
-    <div class="card" style="align-self:start">
-      <div class="lab o">${chip('cc')}작품 소개 초안</div>
-      <p class="mid">5월 10일 구글도구 활용 연수에서 배운 '내 지도 → 구글 어스 슬라이드쇼'를 6학년 사회·도덕·국어 15차시 '배리어프리 세계 여행 설계 프로젝트'로 옮긴 이야기입니다. 아이들은 제미나이로 만든 휠체어 타는 여행 친구 '민우'와 함께 런던·파리·오사카 여행을 계획하며, 스트리트뷰로 입구를 살피고 리뷰를 읽어 휠체어로 갈 수 있는지 확인했습니다.</p>
-      <div class="lab" style="margin-top:16px">${chip('me')}직접 적은 칸</div>
-      <p class="mid muted">연락처, 동의 체크, 제출 버튼</p>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="stat" style="grid-template-columns:repeat(3,1fr)"><div><b>2분 52초</b><span>완성 영상 길이</span></div><div><b>16개</b><span>장면 (Flow 클립·코드 도식·흐린 수업 사진)</span></div><div><b>7번</b><span>고쳐 만든 버전</span></div></div>
-      <div class="card"><div class="lab o">누가 무엇을 했나</div>
-        <p class="big">${chip('me')}말로 시키기, 참고 영상·곡 고르기, 녹음하기, 그리고 "좀 파열음이 큰데?" 같은 말.</p>
-        <p class="big" style="margin-top:10px">${chip('cc')}자료 읽기, 글·대본 쓰기, Flow에 프롬프트 넣고 후보 고르기, 영상 붙이기·고치기.</p>
-        <p class="big" style="margin-top:10px">${chip('fl')}민우와 교실 장면 그림, 8초 영상 클립.</p></div>
+  p: '연락처·동의 칸과 제출 버튼은 내가 직접.',
+  title: '정리', tag: ['요약', 0],
+  html: () => `<div class="cols c2e">
+    <div class="stat2"><div><b>2분 52초</b><span>완성 영상</span></div><div><b>16개</b><span>장면</span></div><div><b>7번</b><span>고친 횟수</span></div></div>
+    <div class="card" style="align-self:center">
+      <p class="big">${chip('me')}말하기, 고르기, 녹음하기</p>
+      <p class="big" style="margin-top:14px">${chip('cc')}자료 읽기, 대본, 프롬프트, 편집</p>
+      <p class="big" style="margin-top:14px">${chip('fl')}그림, 8초 영상</p>
     </div>
   </div>`,
 };
@@ -664,7 +660,7 @@ ST.forEach((s, i) => {
   strip.appendChild(b);
 });
 const dots = $('dots');
-['전체'].concat(ST.map((_, i) => String(i + 1).padStart(2, '0'))).forEach((t, i) => {
+[''].concat(ST.map((_, i) => String(i + 1).padStart(2, '0'))).forEach((t, i) => {
   const b = document.createElement('button'); b.textContent = t; b.onclick = () => { click(); go(i); }; dots.appendChild(b);
 });
 function drawLoop() {
@@ -679,7 +675,7 @@ function drawLoop() {
 // ---- 화면 바꾸기
 let cur = -1;
 function go(n) {
-  n = Math.max(0, Math.min(10, n));
+  n = Math.max(1, Math.min(10, n));
   document.querySelectorAll('video').forEach(v => v.pause());
   const s = SC[n];
   $('top').innerHTML = `<div class="fade"><div class="kick">${s.kick}</div><h2>${s.h}</h2><p>${s.p}</p></div>`;
@@ -687,11 +683,10 @@ function go(n) {
   $('btag').textContent = s.tag[0]; $('btag').className = 'tag' + (s.tag[1] ? ' real' : '');
   $('body').innerHTML = `<div class="fade" style="height:100%">${s.html()}</div>`;
   $('body').scrollTop = 0;
-  moreHint();
   strip.querySelectorAll('.st').forEach((b, i) => { b.classList.toggle('on', i + 1 === n); b.classList.toggle('done', i + 1 < n); });
   dots.querySelectorAll('button').forEach((b, i) => { b.classList.toggle('on', i === n); b.classList.toggle('done', i < n); });
   $('loop').classList.toggle('show', n === 9);
-  $('prev').disabled = n === 0;
+  $('prev').disabled = n === 1;
   $('next').innerHTML = n === 0 ? '1단계부터 보기 <span>›</span>' : n === 10 ? '끝' : `다음: ${ST[n].t} <span>›</span>`;
   $('next').disabled = n === 10;
   if (n > 0 && n !== cur) tick(520 + n * 28);
@@ -709,8 +704,9 @@ addEventListener('keydown', e => {
 });
 function toggleFull() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); }
 $('full').onclick = toggleFull;
-addEventListener('resize', drawLoop);
-go(+(location.hash.slice(1)) || 0);
+function fit() { const r = document.documentElement; const z = innerWidth > 900 ? Math.min(1, innerWidth / 1600, innerHeight / 900) : 1; r.style.zoom = z; r.style.setProperty('--z', z); drawLoop(); }
+addEventListener('resize', fit); fit();
+go(+(location.hash.slice(1)) || 1);
 requestAnimationFrame(drawLoop);
 document.fonts && document.fonts.ready.then(drawLoop);
 </script>
