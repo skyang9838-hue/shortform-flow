@@ -8,313 +8,618 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 :root{
-  --bg:#0a0a0b; --bg2:#0f0f11; --panel:#141416; --panel2:#1a1a1d; --panel3:#222226;
+  --bg:#0a0a0b; --panel:#141416; --panel2:#1a1a1d; --panel3:#222226;
   --line:rgba(255,255,255,.07); --line2:rgba(255,255,255,.12);
   --ink:#f1ebe1; --ink2:#b7b0a5; --ink3:#7c776e; --ink4:#55514b;
-  --or:#ff7a1a; --or2:#ffa04d; --or3:#ffc48f; --ordeep:#b24d06;
+  --or:#ff7a1a; --or2:#ffa04d; --or3:#ffc48f; --orbg:#2a1a0e; --fl:#5bb1ff;
   --flap:"IBM Plex Sans KR",Pretendard,"Malgun Gothic",sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--bg);color:var(--ink);overflow:hidden}
-body{font-family:Pretendard,"Malgun Gothic",system-ui,sans-serif;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;
+body{font-family:Pretendard,"Malgun Gothic",system-ui,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;
   background:radial-gradient(1200px 500px at 70% -10%,rgba(255,122,26,.07),transparent 60%),var(--bg)}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.app{height:100vh;display:grid;grid-template-rows:auto auto 1fr auto;gap:14px;padding:18px 28px 18px;max-width:1680px;margin:0 auto}
+em{font-style:normal;color:var(--or2)}
+.app{height:100vh;display:grid;grid-template-rows:auto auto auto 1fr auto;gap:12px;padding:14px 28px 14px;max-width:1800px;margin:0 auto}
 
-header{display:flex;align-items:center;gap:11px;height:40px}
-.mark{width:30px;height:30px;border-radius:7px;background:var(--or);display:grid;place-items:center;box-shadow:0 0 0 1px rgba(255,160,77,.5) inset,0 6px 18px -6px rgba(255,122,26,.7)}
-.mark svg{width:16px;height:16px;fill:#1a0d02}
+/* 머리줄 */
+header{display:flex;align-items:center;gap:12px;height:40px}
+.mark{width:30px;height:30px;border-radius:7px;background:var(--or);display:grid;place-items:center;box-shadow:0 6px 18px -6px rgba(255,122,26,.7)}
+.mark svg{width:17px;height:17px;fill:none;stroke:#1a0d02;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 header h1{font-family:var(--flap);font-size:21px;font-weight:700;letter-spacing:-.02em}
-header small{color:var(--ink3);font-size:13px;margin-left:2px}
+header small{color:var(--ink3);font-size:13px}
 .sp{flex:1}
 .ib{width:36px;height:36px;border-radius:9px;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;color:var(--ink2)}
 .ib:hover{color:var(--ink);border-color:var(--line2)}
 .ib svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-.tourtop{min-height:118px}
-.tourtop .ck{font-size:16px;font-weight:700;color:var(--or)}
-.tourtop h2{font-family:var(--flap);font-size:clamp(27px,2.9vw,40px);line-height:1.36;font-weight:700;letter-spacing:-.025em;margin-top:6px;max-width:1100px}
-.tourtop h2 em{font-style:normal;color:var(--or2)}
-.tourtop h2 .sub{display:block;color:var(--ink2);font-weight:500;font-size:.62em;letter-spacing:-.01em;margin-top:4px}
+/* 제목 */
+.top .kick{font-size:14px;font-weight:700;color:var(--or)}
+.top h2{font-family:var(--flap);font-size:clamp(28px,2.6vw,42px);line-height:1.3;font-weight:700;letter-spacing:-.025em;margin-top:4px}
+.top p{color:var(--ink2);font-size:clamp(17px,1.35vw,22px);margin-top:4px;letter-spacing:-.01em}
+.top{min-height:112px}
 .fade{animation:fade .45s both}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-.flowbox{position:relative;min-height:0;background:linear-gradient(var(--bg2),#0c0c0e);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.flowbox::before{content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:32px 32px}
-#flow{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* 단계 줄 */
+.strip{position:relative;display:grid;grid-template-columns:repeat(10,1fr);gap:20px;padding:40px 22px 34px;
+  background:rgba(20,20,22,.6);border:1px solid var(--line);border-radius:14px}
+.st{position:relative;text-align:left;border-radius:10px;padding:9px 11px 10px;background:var(--panel2);border:1px solid rgba(255,255,255,.08);
+  transition:background .35s,border-color .35s,opacity .35s;opacity:.55;min-width:0}
+.st:hover{opacity:.85}
+.st .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--ink4)}
+.st .t{display:block;font-size:16.5px;font-weight:700;letter-spacing:-.02em;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st .ws{position:absolute;top:-11px;right:6px;display:flex;gap:3px}
+.st .w{font-size:11px;font-weight:800;padding:1px 6px;border-radius:9px;background:var(--panel3);color:var(--ink3);border:1px solid var(--line2);white-space:nowrap}
+.st::after{content:"";position:absolute;top:50%;right:-21px;width:20px;height:2px;background:rgba(255,255,255,.08);transition:background .35s}
+.st:last-child::after{display:none}
+.st.done{opacity:.9;border-color:rgba(255,122,26,.35)}
+.st.done::after{background:rgba(255,122,26,.55)}
+.st.on{opacity:1;background:var(--orbg);border-color:var(--or);box-shadow:0 0 0 1px var(--or),0 10px 30px -12px rgba(255,122,26,.6)}
+.st.on .t,.st.done .t{color:var(--ink)}
+.st.on .n{color:var(--or2)}
+.st[data-w="나"].on{background:var(--ink);border-color:var(--ink);box-shadow:0 10px 30px -12px rgba(241,235,225,.4)}
+.st[data-w="나"].on .t{color:#141210} .st[data-w="나"].on .n{color:#7a6a58}
+.w.me{background:var(--ink);color:#141210;border-color:var(--ink)}
+.w.cc{background:var(--or);color:#1a0d02;border-color:var(--or)}
+.w.fl{background:var(--fl);color:#06121f;border-color:var(--fl)}
+/* 도구 칩 (본문) */
+.chip{display:inline-block;font-size:13px;font-weight:800;padding:1px 8px;border-radius:7px;margin-right:6px;vertical-align:2px;white-space:nowrap}
+.chip.me{background:var(--ink);color:#141210}.chip.cc{background:var(--or);color:#1a0d02}.chip.fl{background:var(--fl);color:#06121f}
+/* 실제로 시킨 말 */
+.say{margin-bottom:12px}
+.say .to{font-size:13px;color:var(--ink3);margin-bottom:5px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.say .q{background:var(--ink);color:#141210;border-radius:16px 16px 16px 4px;padding:11px 16px;font-size:17.5px;font-weight:600;line-height:1.45;display:inline-block;max-width:100%}
+.say.fl .q{background:#0f2233;color:#d9ecff;border:1px solid rgba(91,177,255,.45);font-weight:500;font-size:15px;border-radius:12px}
+.say.cc .q{background:var(--orbg);color:var(--or3);border:1px solid rgba(255,122,26,.45);font-weight:500;font-size:15px;border-radius:12px}
+/* 0 전체 */
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.tools .card p{font-size:15.5px;color:var(--ink2);margin-top:6px;line-height:1.5}
+.tools .card b{font-size:19px}
+.map{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 16px}
+.map button{display:grid;grid-template-columns:44px 100px 1fr;gap:10px;align-items:center;text-align:left;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 14px}
+.map button:hover{border-color:var(--or)}
+.map .n{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.map .t{font-weight:700;font-size:16px}
+.map .d{font-size:14.5px;color:var(--ink2)}
+.map .d .chip{font-size:11.5px;padding:0 6px;margin-right:4px}
+/* 9 판 목록 */
+.vlist{display:flex;flex-direction:column;gap:8px}
+.vrow{display:grid;grid-template-columns:76px 52px 1fr;gap:12px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:9px 14px}
+.vrow b{font-size:15.5px}.vrow .d{font-family:var(--mono);font-size:13px;color:var(--ink3)}
+.vrow .x{font-size:15px;color:var(--ink2)}
+.vrow .x q{color:var(--ink);font-weight:600}
+/* 6 프롬프트 흐름 */
+.evo{display:grid;grid-template-columns:150px 1fr 1fr 240px;gap:14px;align-items:start;margin-top:6px}
+.evo img{width:100%;border-radius:8px;display:block;background:#fff}
+.evo .ar{font-size:14px;color:var(--ink2);line-height:1.5}
+.loop{position:absolute;inset:0;pointer-events:none;overflow:visible}
+.loop path{fill:none;stroke:var(--or);stroke-width:2;stroke-dasharray:6 6;opacity:0;transition:opacity .4s}
+.loop text{fill:var(--or2);font-size:12.5px;font-weight:700;opacity:0;transition:opacity .4s}
+.loop.show path,.loop.show text{opacity:1}
+.loop.show path{animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-24}}
+.legend{position:absolute;top:10px;left:22px;display:flex;gap:14px;font-size:13px;font-weight:600;color:var(--ink2)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
 
-/* 흐름도 */
-.colh .n{font-family:var(--mono);font-size:11px;fill:var(--or);letter-spacing:.1em}
-.colh .t{font-size:13.5px;fill:var(--ink);font-weight:600}
-.colh line{stroke:var(--line2);stroke-dasharray:2 4}
-.skel path{fill:none;stroke:rgba(255,255,255,.09);stroke-width:1.6}
-.node{cursor:pointer;transition:opacity .4s}
-.node rect.bg{fill:var(--panel2);stroke:rgba(255,255,255,.09);transition:fill .35s,stroke .35s}
-.node:hover rect.bg{stroke:rgba(255,122,26,.55)}
-.node .sn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;fill:var(--ink4)}
-.node .lab{font-size:18px;font-weight:700;fill:var(--ink2);letter-spacing:-.02em}
-.node .ds{font-size:13px;fill:var(--ink4)}
-.node .chip rect{fill:var(--panel3);stroke:var(--line2)}
-.node .chip text{font-size:11px;font-weight:800;fill:var(--ink3)}
-.node.done rect.bg{stroke:rgba(255,122,26,.45)}
-.node.done .lab{fill:var(--ink)} .node.done .ds{fill:var(--ink3)}
-.node.on rect.bg{fill:#2a1a0e;stroke:var(--or);filter:url(#glow)}
-.node.on .lab{fill:var(--ink)} .node.on .sn{fill:var(--or2)} .node.on .ds{fill:var(--ink2)}
-.node.me.on rect.bg{fill:#f1ebe1;stroke:#f1ebe1}
-.node.me.on .lab{fill:#141210} .node.me.on .sn{fill:#8a7a66} .node.me.on .ds{fill:#5d554b}
-.node .chip.me rect{fill:var(--ink);stroke:var(--ink)} .node .chip.me text{fill:#141210}
-.node .chip.ai rect{fill:var(--or);stroke:var(--or)} .node .chip.ai text{fill:#1a0d02}
-.node .chip.both rect{fill:url(#half);stroke:none} .node .chip.both text{fill:#1a0d02}
-.tp{fill:none;stroke:var(--or);stroke-width:5;stroke-linecap:round}
-.tp.old{opacity:.45}
-.loop{fill:none;stroke:var(--or2);stroke-width:2.4;stroke-dasharray:7 7;animation:ants 1s linear infinite}
-@keyframes ants{to{stroke-dashoffset:-28}}
-.loopl{font-size:13.5px;fill:var(--or3);font-weight:700}
-.loopbg{fill:#0d0d0f}
-#flow.big #nodes,#flow.big #tour,#flow.big .skel,#flow.big .colh,#flow.big #loopG{opacity:.22;transition:opacity .4s}
+/* 화면 */
+.screen{min-height:0;display:flex;flex-direction:column;background:linear-gradient(#17171a,#111113);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:0 24px 50px -24px rgba(0,0,0,.9)}
+.bar{display:flex;align-items:center;gap:10px;height:36px;padding:0 14px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink3);flex:none}
+.bar .dots{display:flex;gap:6px}.bar .dots i{width:9px;height:9px;border-radius:50%;background:#2c2c31}
+.bar .tag{margin-left:auto;font-size:12px;font-weight:700;padding:2px 9px;border-radius:7px;border:1px solid var(--line2);color:var(--ink2)}
+.bar .tag.real{color:var(--or2);border-color:rgba(255,122,26,.5)}
+.body{flex:1;min-height:0;padding:16px 22px;overflow:auto}
+.body::-webkit-scrollbar{width:8px}.body::-webkit-scrollbar-thumb{background:#2a2a2e;border-radius:4px}
 
-/* 시작 화면 */
-.intro{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;pointer-events:none}
-.intro .lg{display:flex;gap:22px;font-size:15px;color:var(--ink2)}
-.intro .lg span{display:flex;align-items:center;gap:8px}
-.intro .lg i{width:14px;height:14px;border-radius:4px;display:inline-block}
-.intro .nums{display:flex;gap:34px}
-.intro .nums b{display:block;font-family:var(--flap);font-size:34px;letter-spacing:-.02em}
-.intro .nums span{font-size:13px;color:var(--ink3)}
-.intro button{pointer-events:auto;height:46px;padding:0 22px;border-radius:12px;background:var(--or);color:#1a0d02;font-weight:800;font-size:16px;box-shadow:0 10px 26px -10px rgba(255,122,26,.9)}
+.screen{position:relative}
+.more{position:absolute;right:18px;bottom:14px;padding:8px 16px;border-radius:20px;background:var(--or);color:#1a0d02;font-weight:800;font-size:14px;box-shadow:0 8px 22px -8px rgba(0,0,0,.9);opacity:0;pointer-events:none;transition:opacity .3s}
+.more.show{opacity:1;pointer-events:auto}
+video{display:block;background:#000;border-radius:10px;max-width:100%}
+.vfill{width:100%;height:100%;object-fit:contain}
+.cols{display:grid;gap:22px;height:100%;min-height:0}
+.c2{grid-template-columns:1.25fr 1fr}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.lab{font-size:13px;font-weight:700;letter-spacing:0;color:var(--ink3);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.lab.o{color:var(--or2)}
+.big{font-size:20px;line-height:1.5}
+.mid{font-size:17px;line-height:1.55}
+.muted{color:var(--ink2)}
+.small{font-size:14px;color:var(--ink3)}
+.mono{font-family:var(--mono);font-size:13.5px}
 
-/* 재현 창 */
-.scr{font-family:Pretendard,sans-serif;width:100%;height:100%;background:#f6f3ee;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;
-  box-shadow:0 0 0 1px rgba(255,255,255,.12),0 30px 60px -20px rgba(0,0,0,.9),0 0 50px -10px rgba(255,122,26,.35);animation:scin .55s cubic-bezier(.2,.9,.3,1) both}
-.scr.now{animation:none}
-@keyframes scin{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-.scrb{height:30px;flex:none;display:flex;align-items:center;gap:6px;padding:0 12px;background:#e6e1d8;border-bottom:1px solid #d6d0c4}
-.scrb i{width:10px;height:10px;border-radius:50%;background:#cfc8bb}
-.scrb i:first-child{background:#ff6b5a}.scrb i:nth-child(2){background:#f5c04a}.scrb i:nth-child(3){background:#5cc46a}
-.scrb span{font-size:12.5px;font-weight:600;color:#3c3830;margin-left:6px}
-.scrb em{margin-left:auto;font-style:normal;font-size:11px;color:#8a8478;border:1px solid #cfc8bb;border-radius:999px;padding:1px 8px}
-.scrb .sz{margin-left:6px;font:600 11.5px Pretendard,sans-serif;color:#3c3830;background:#fff;border:1px solid #cfc8bb;border-radius:6px;padding:2px 8px;cursor:pointer}
-.scrb .sz:hover{border-color:var(--or);color:var(--ordeep)}
-.scrc{flex:1;min-height:0;overflow:hidden;color:#1d1b17;padding:14px 16px}
-.scr.term{background:#141416}
-.scr.term .scrb{background:#202024;border-color:#2c2c31} .scr.term .scrb span{color:#cfc8bb} .scr.term .scrb em{color:#8a8478;border-color:#3a3a40}
-.scr.term .scrb .sz{background:#2a2a2f;color:#cfc8bb;border-color:#3a3a40}
-.scr.term .scrc{color:#e9e3d8}
+/* 1 대화 */
+.bub{max-width:640px;margin-top:2px;background:var(--ink);color:#141210;border-radius:18px 18px 4px 18px;padding:14px 20px;font-size:21px;font-weight:600;margin-left:auto}
+.bubwho{text-align:right;font-size:13px;color:var(--ink3);margin:6px 4px 10px}
+.ai-say{font-size:15px;color:var(--or2);font-weight:700;margin-bottom:8px}
+.doc{background:var(--panel2);border:1px solid rgba(255,122,26,.35);border-radius:12px;padding:16px 20px}
+.doc h3{font-size:20px;letter-spacing:-.02em}
+.kv{display:grid;grid-template-columns:90px 1fr;gap:6px 14px;margin-top:10px;font-size:16px}
+.kv b{color:var(--ink3);font-weight:600}
+.bars{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.bars div{font-size:14px;color:var(--ink2)}
+.bars i{display:block;height:8px;border-radius:4px;background:var(--or);margin-top:5px}
+.warn{margin-top:14px;padding:10px 14px;border-radius:9px;background:rgba(255,122,26,.12);border:1px solid rgba(255,122,26,.5);font-size:16px;font-weight:700;color:var(--or3)}
 
-/* 창 안 공통 */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;height:100%}
-.g2.w{grid-template-columns:1.15fr 1fr}
-.hd{font-size:11px;font-weight:700;letter-spacing:.06em;color:#9a8f80;margin-bottom:6px}
-.term .hd{color:#8a8478}
-.hd.o{color:var(--ordeep)} .term .hd.o{color:var(--or2)}
-.bub{background:#1d1b17;color:#f6f3ee;border-radius:14px 14px 4px 14px;padding:9px 13px;font-size:14.5px;font-weight:600;margin-left:auto;max-width:330px}
-.bubai{background:#fff;border:1px solid #e0d9cc;border-radius:14px 14px 14px 4px;padding:9px 13px;font-size:13.5px;margin-top:10px;max-width:340px}
-.bubai b{color:var(--ordeep)}
-.who2{font-size:11px;color:#9a8f80;margin:3px 2px 0;text-align:right}
-.docc{background:#fff;border:1px solid #e0d9cc;border-radius:10px;padding:11px 13px;height:100%}
-.docc h4{font-size:14.5px;letter-spacing:-.02em}
-.kv{display:grid;grid-template-columns:44px 1fr;gap:3px 10px;margin-top:6px;font-size:12.5px}
-.kv b{color:#9a8f80;font-weight:600}
-.bars{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;font-size:11px;color:#6a6258}
-.bars i{display:block;height:5px;border-radius:3px;background:var(--or);margin-top:3px}
-.warn{margin-top:8px;padding:6px 9px;border-radius:7px;background:#fff1e4;border:1px solid #ffc48f;font-size:12.5px;font-weight:700;color:var(--ordeep)}
-.fl{display:grid;grid-template-columns:38px 1fr;gap:9px;align-items:center;padding:2px 0;border-bottom:1px solid #26262b}
-.fl .x{font-family:var(--mono);font-size:10.5px;text-align:center;padding:3px 0;border-radius:5px;background:#26262b;color:#b7b0a5}
-.fl b{font-size:13px;display:block} .fl span{font-size:11.5px;color:#8a8478}
-.qt{font-size:13.5px;line-height:1.6;border-left:3px solid var(--or);padding-left:10px;color:#e9e3d8}
-.big1{font-size:15px;line-height:1.55}
-.li{font-size:12.5px;padding:5px 0;border-bottom:1px solid #e6e0d5;line-height:1.45}
-.li small{display:block;color:#8a8478;font-size:11.5px}
-.li.no::before{content:"✕ ";color:#e0503e;font-weight:800}
-.li.ok::before{content:"○ ";color:var(--ordeep);font-weight:800}
-.df{background:#fff;border:1px solid #e0d9cc;border-radius:9px;padding:7px 10px;margin-bottom:7px}
-.df .s{font-family:var(--mono);font-size:10.5px;color:#9a8f80}
-.df del{display:block;font-size:12.5px;color:#9a8f80;text-decoration-color:#e0503e}
-.df ins{display:block;font-size:12.5px;text-decoration:none;font-weight:700}
-.df ins::before{content:"→ ";color:var(--or)}
-.df .why{font-size:11px;color:var(--ordeep);margin-top:2px}
-.code{background:#1d1b17;color:#cfc8bb;border-radius:9px;padding:10px 12px;font-family:var(--mono);font-size:11.5px;line-height:1.65;white-space:pre-wrap}
-.code .c{color:#8fb383}.code .k{color:var(--or2)}
-.im{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block}
-.rl{display:grid;grid-template-columns:20px 1fr;font-size:12.5px;padding:4px 0;border-bottom:1px solid #26262b}
-.rl b{font-family:var(--mono);color:var(--or2)}
-.t4{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;height:100%}
-.t4 .c{display:flex;flex-direction:column;gap:5px;min-width:0}
-.t4 video,.t4 img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;display:block;background:#000}
-.t4 p{font-size:11.5px;color:#a8a196;line-height:1.45}
-.pk{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.pk div{position:relative}.pk div.no img{opacity:.35}
-.pk div.yes::after{content:"고름";position:absolute;top:3px;left:3px;font-size:10px;font-weight:800;background:#f1ebe1;color:#141210;padding:0 5px;border-radius:5px}
-.pk img{aspect-ratio:auto!important}
-.ch{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-top:4px}
-.ch span{padding:3px 8px;border-radius:6px;background:#26262b;font-size:12px}
-.ch i{color:var(--or);font-style:normal;font-size:12px}
-.tl{display:flex;height:26px;border-radius:5px;overflow:hidden;gap:2px;margin-top:6px}
-.tl div{background:#26262b;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:#a8a196;min-width:0}
-.tl div.ep{background:#3a2412;color:var(--or2)}
-.vr{display:grid;grid-template-columns:56px 36px 1fr;gap:8px;align-items:center;font-size:13.5px;padding:10px 0;border-bottom:1px solid #e6e0d5}
-.vr b{font-size:13px} .vr .d{font-family:var(--mono);font-size:11px;color:#9a8f80}
-.me1{font-size:10.5px;font-weight:800;background:#1d1b17;color:#f6f3ee;border-radius:5px;padding:0 5px;margin-right:4px}
-.fg{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:6px;height:100%}
-.st3{display:flex;flex-direction:column;justify-content:center;gap:12px}
-.st3 b{display:block;font-family:var(--flap);font-size:26px;letter-spacing:-.02em;color:#f1ebe1}
-.st3 span{font-size:11.5px;color:#8a8478}
+/* 2 폴더 */
+.tree{display:flex;flex-direction:column;gap:7px}
+.file{display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:center;background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:7px 14px;
+  opacity:0;animation:fade .45s both}
+.ext{font-family:var(--mono);font-size:12px;font-weight:600;text-align:center;padding:5px 0;border-radius:6px;background:var(--panel3);color:var(--ink2)}
+.file b{font-size:16.5px}
+.file span{display:block;font-size:14.5px;color:var(--ink2)}
+.arrowbox{display:flex;flex-direction:column;justify-content:center;gap:14px}
+.quote{font-size:19px;line-height:1.6;border-left:3px solid var(--or);padding-left:16px}
 
+/* 3 명세서 */
+.ok li,.no li{list-style:none;padding:9px 0;border-bottom:1px solid var(--line);font-size:16px}
+.ok li::before{content:"○ ";color:var(--or2);font-weight:800}
+.no li::before{content:"✕ ";color:#ff6b5a;font-weight:800}
+.no li small{display:block;color:var(--ink3);font-size:14px;margin-top:2px}
+
+/* 4 대본 */
+.diff{display:grid;gap:12px}
+.dif{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+.dif .s{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.dif del{display:block;color:#a89e92;text-decoration-color:#ff6b5a;text-decoration-thickness:2px;font-size:16.5px;margin-top:4px}
+.dif ins{display:block;text-decoration:none;color:var(--ink);font-size:16.5px;font-weight:600;margin-top:3px}
+.dif ins::before{content:"→ ";color:var(--or)}
+.dif .why{font-size:14px;color:var(--or3);margin-top:5px}
+.code{background:#0c0c0e;border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:var(--mono);font-size:13.5px;line-height:1.7;color:var(--ink2);white-space:pre-wrap}
+.code .c{color:#6f8f6a}.code .k{color:var(--or2)}
+
+/* 5 톤 */
+.frames{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1.6fr 1fr;gap:10px;height:100%;min-height:0}
+.frames img{width:100%;height:100%;object-fit:cover;border-radius:8px;display:block;min-height:0}
+.frames .wide{grid-column:span 2}
+.rule{display:grid;grid-template-columns:28px 1fr;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:16px}
+.rule b{font-family:var(--mono);color:var(--or2)}
+
+/* 6 장면 */
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+.tile .lab{margin-bottom:6px}
+.tile video,.tile img{width:100%;border-radius:8px;display:block;aspect-ratio:16/9;object-fit:cover;background:#000}
+.tile p{font-size:14.5px;color:var(--ink2);margin-top:8px;line-height:1.5}
+.pick{position:relative}
+.pick .pk{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pick .pk div{position:relative}
+.pick .pk img{aspect-ratio:auto}
+.pick .pk div.no img{opacity:.4}
+.pick .pk div.yes::after{content:"고름";position:absolute;top:6px;left:6px;font-size:12px;font-weight:800;background:var(--ink);color:#141210;padding:1px 7px;border-radius:7px}
+.chev{display:flex;align-items:center;justify-content:center;color:var(--or);font-size:22px}
+
+/* 7 타임라인 */
+.tl{display:flex;height:46px;border-radius:8px;overflow:hidden;margin-top:14px;gap:2px}
+.tl div{background:var(--panel3);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;color:var(--ink2);min-width:0;
+  opacity:0;animation:fade .3s both}
+.tl div.ep{background:var(--orbg);color:var(--or2);border:1px solid rgba(255,122,26,.4)}
+.tlax{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--ink3);margin-top:6px}
+
+/* 8 녹음 */
+.ab{display:flex;gap:8px;margin-bottom:12px}
+.ab button,.vers button{padding:9px 16px;border-radius:9px;border:1px solid var(--line2);background:var(--panel2);font-size:15.5px;font-weight:600;color:var(--ink2)}
+.ab button.on{background:var(--or);color:#1a0d02;border-color:var(--or)}
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+.chain span{padding:6px 11px;border-radius:8px;background:var(--panel3);font-size:14.5px}
+.chain i{color:var(--or);font-style:normal}
+
+/* 9 판 */
+.vers{display:flex;flex-direction:column;gap:7px}
+.vers button{display:grid;grid-template-columns:70px 54px 1fr;gap:10px;align-items:center;text-align:left;padding:9px 14px}
+.vers button b{font-size:15.5px;color:var(--ink)}
+.vers button .d{font-family:var(--mono);font-size:13px;color:var(--ink3)}
+.vers button .x{font-size:14.5px;color:var(--ink2);font-weight:500}
+.vers button.on{border-color:var(--or);background:var(--orbg)}
+.vers button.on .d{color:var(--or2)}
+.who{font-size:13px;font-weight:700;color:var(--ink);background:var(--panel3);padding:1px 7px;border-radius:6px;margin-right:6px}
+
+/* 10 끝 */
+.stat{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat div{background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.stat b{display:block;font-family:var(--flap);font-size:30px;letter-spacing:-.02em;color:var(--ink)}
+.stat span{font-size:14px;color:var(--ink3)}
+.stat .gold b{color:var(--or2)}
+
+/* 아래 */
 nav{display:flex;align-items:center;gap:10px}
-.chips{display:flex;gap:6px;flex-wrap:wrap}
-.chips button{height:30px;min-width:32px;padding:0 10px;border-radius:15px;border:1px solid var(--line2);font-size:12.5px;color:var(--ink3);font-family:var(--mono)}
-.chips button.done{color:var(--ink2);border-color:rgba(255,122,26,.4)}
-.chips button.on{background:var(--or);border-color:var(--or);color:#1a0d02;font-weight:700}
+.dots2{display:flex;gap:6px;flex-wrap:wrap}
+.dots2 button{height:30px;min-width:30px;padding:0 10px;border-radius:15px;border:1px solid var(--line2);font-size:13px;color:var(--ink3);font-family:var(--mono)}
+.dots2 button.on{background:var(--or);border-color:var(--or);color:#1a0d02;font-weight:700}
+.dots2 button.done{color:var(--ink2);border-color:rgba(255,122,26,.4)}
 .prev{width:40px;height:40px;border-radius:10px;border:1px solid var(--line2);background:var(--panel);font-size:18px;color:var(--ink2)}
-.prev:disabled{opacity:.3}
-.main{height:42px;padding:0 18px;border-radius:10px;background:var(--or);color:#1a0d02;font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 22px -10px rgba(255,122,26,.9)}
-.cover{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px 16px;transition:opacity .35s}
-.cover.off{opacity:0;pointer-events:none}
-.cover .ck{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--or2)}
-.cover h2{font-family:var(--flap);font-size:clamp(20px,3vw,30px);font-weight:700;text-align:center;line-height:1.35;letter-spacing:-.02em}
-.cover .vid{width:min(960px,100%,calc((100vh - 230px) * 16 / 9));aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;border:1px solid var(--line2);box-shadow:0 30px 80px -30px rgba(0,0,0,.9)}
-.cover .vid iframe{width:100%;height:100%;border:0;display:block}
-.cover .go{height:48px;padding:0 24px;border-radius:12px;background:var(--or);color:#1a0d02;font-weight:800;font-size:16px;box-shadow:0 10px 26px -10px rgba(255,122,26,.9)}
+.next{height:42px;padding:0 18px 0 20px;border-radius:10px;background:var(--or);color:#1a0d02;font-weight:800;font-size:15px;display:flex;align-items:center;gap:8px;
+  box-shadow:0 8px 22px -10px rgba(255,122,26,.9)}
+.next:disabled{opacity:.35;cursor:default}
+.hint{font-size:13px;color:var(--ink3)}
+
+/* 폰·좁은 화면 */
+@media (max-width:900px){
+  html,body{overflow:auto;height:auto}
+  .app{height:auto;min-height:100vh;padding:10px 16px 16px;grid-template-rows:auto}
+  header small,.hint,#full{display:none}
+  .top{min-height:0}
+  .strip{grid-template-columns:repeat(5,1fr);gap:16px 8px;padding:34px 10px 14px}
+  .st{padding:7px 7px 8px}.st .t{font-size:13px;white-space:normal;line-height:1.25;word-break:keep-all}
+  .st::after,.loop{display:none}
+  .legend{left:10px;top:8px;font-size:11px;gap:10px}
+  .screen{min-height:60vh}
+  .body{padding:14px;overflow:visible}
+  .cols,.c2,.tools,.map,.evo{grid-template-columns:1fr!important;height:auto}
+  .tiles{grid-template-columns:1fr}
+  .st .ws{position:static;flex-wrap:wrap;margin-bottom:4px}.st .w{font-size:10px;padding:0 4px}
+  .st .n{display:none}.strip{padding-top:32px}
+  .evo img{max-width:200px}
+  .tile .lab{flex-wrap:wrap;font-family:inherit;text-transform:none}
+  .frames{height:auto;grid-template-rows:auto}
+  .map button{grid-template-columns:36px 1fr}.map .d{grid-column:1/-1}
+  .stat{grid-template-columns:1fr 1fr}
+  nav{position:sticky;bottom:0;background:var(--bg);padding:8px 0}
+  .dots2{display:none}
+}
 </style>
 </head>
 <body>
-<div class="cover" id="cover">
-  <div class="ck">완성 영상 · 2분 52초</div>
-  <h2>민우와 떠난 세계 여행</h2>
-  <div class="vid"><iframe id="yt" src="https://www.youtube-nocookie.com/embed/8vDlwSu2_y4?rel=0&playsinline=1&enablejsapi=1" title="완성 영상" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>
-  <button class="go" id="coverGo">어떻게 만들었냐면 ›</button>
-</div>
 <div class="app">
   <header>
-    <div class="mark"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10-6.5z"/></svg></div>
-    <h1>숏폼 제작 흐름</h1><small>AI와 나눠 만든 2분 52초</small>
+    <div class="mark"><svg viewBox="0 0 24 24"><path d="M5 7l7 5-7 5V7z"/><path d="M14 17h5"/></svg></div>
+    <h1>숏폼 제작 흐름</h1><small>연수 우수사례 영상을 이렇게 만들었습니다</small>
     <div class="sp"></div>
-    <button class="ib" id="vidBtn" title="완성 영상 다시 보기"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9v6l5-3z"/></svg></button>
-    <button class="ib" id="sound" title="효과음"></button>
-    <button class="ib" id="full" title="전체 화면"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+    <button class="ib" id="sound" title="효과음 켜기/끄기"></button>
+    <button class="ib" id="full" title="전체 화면 (F)"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
   </header>
-  <div class="tourtop" id="top"></div>
-  <div class="flowbox" id="box"><svg id="flow"></svg><div class="intro" id="intro"></div></div>
+
+  <div class="top" id="top"></div>
+
+  <div class="strip" id="strip">
+    <div class="legend"><span><i style="background:var(--ink)"></i>나</span><span><i style="background:var(--or)"></i>클로드 코드</span><span><i style="background:var(--fl)"></i>Flow</span></div>
+    <svg class="loop" id="loop"><path id="loopP"/><text id="loopT" text-anchor="middle">마음에 안 들면 다시</text></svg>
+  </div>
+
+  <div class="screen">
+    <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span id="btitle"></span><span class="tag" id="btag"></span></div>
+    <div class="body" id="body"></div>
+    <button class="more" id="more" onclick="moreDown()">아래에 더 있어요 ↓</button>
+  </div>
+
   <nav>
-    <div class="chips" id="chips"></div>
+    <div class="dots2" id="dots"></div>
     <div class="sp"></div>
+    <span class="hint">← → 키로 넘기기</span>
     <button class="prev" id="prev" title="이전">‹</button>
-    <button class="main" id="main"></button>
+    <button class="next" id="next"></button>
   </nav>
 </div>
+
 <script>
 const $ = id => document.getElementById(id);
-const NS = 'http://www.w3.org/2000/svg';
-const el = (tag, attrs = {}, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+const V = p => p;
 
-// ── 단계: 칸 5줄, 뱀 모양 (1줄 위→아래, 2줄 아래→위 …)
-const COLS = ['준비', '글', '그림', '소리', '마무리'];
+// 단계: w = 누가 (me 나 / cc 클로드 코드 / fl Flow)
 const ST = [
-  { t: '공모 찾기', d: '한마디 → 공문', w: 'both', c: 0, r: 0 },
-  { t: '재료 모으기', d: '수업 자료 폴더', w: 'me', c: 0, r: 1 },
-  { t: '명세서', d: '쓸 사실 · 쓰지 말 것', w: 'both', c: 1, r: 1 },
-  { t: '대본', d: '문장마다 근거', w: 'ai', c: 1, r: 0 },
-  { t: '톤 정하기', d: '레퍼런스 두 개', w: 'me', c: 2, r: 0 },
-  { t: '장면 만들기', d: '코드 도식 + Flow', w: 'both', c: 2, r: 1 },
-  { t: '가조립', d: 'AI 목소리로 먼저', w: 'ai', c: 3, r: 1 },
-  { t: '내 목소리', d: '녹음 → 자막 맞춤', w: 'me', c: 3, r: 0 },
-  { t: '고치기', d: '일곱 판', w: 'both', c: 4, r: 0 },
-  { t: '완성', d: '2분 52초', w: 'me', c: 4, r: 1 },
+  { t: '공모 찾기', w: ['me', 'cc'] },
+  { t: '재료 모으기', w: ['me', 'cc'] },
+  { t: '사실 정리', w: ['me', 'cc'] },
+  { t: '대본', w: ['cc'] },
+  { t: '느낌 정하기', w: ['me'] },
+  { t: '장면 만들기', w: ['me', 'cc', 'fl'] },
+  { t: '미리 붙여 보기', w: ['cc'] },
+  { t: '내 목소리', w: ['me', 'cc'] },
+  { t: '고치기', w: ['me', 'cc'] },
+  { t: '제출', w: ['me', 'cc'] },
 ];
-const WTXT = { me: '나', ai: 'AI', both: '나+AI' };
+const CH = { me: '나', cc: '클로드 코드', fl: 'Flow' };
+const SHORT = CH;
+const chip = k => `<span class="chip ${k}">${CH[k]}</span>`;
+// 내가 클로드 코드에 한 말
+const said = (text, when) => `<div class="say"><div class="to">${chip('me')}→ ${chip('cc')} 내가 친 말 그대로 · ${when}</div><div class="q">${text}</div></div>`;
+// 클로드 코드가 Flow에 친 프롬프트
+const typed = (text, when) => `<div class="say fl"><div class="to">${chip('cc')}→ ${chip('fl')} 클로드 코드가 크롬으로 직접 친 프롬프트 · ${when}</div><div class="q">${text}</div></div>`;
 
-// ── 장면마다 자막과 창
-const TOP0 = { ck: '시작', h: '숏폼 하나, <em>AI와 나눠서</em> 만들었습니다.', sub: '흰 칸은 내가, 주황 칸은 AI가 했습니다. 순서대로 보거나 칸을 눌러 보세요.' };
-const SC = [null,
- { h: '<em>한마디</em>로 시작했습니다.', sub: '받은 공문 더미는 AI가 뒤져 찾고, 낼지 말지는 내가 정했습니다.',
-   title: 'AI와 나눈 대화', tag: '재현 · 내가 한 말은 실제', light: 1,
-   body: `<div class="g2"><div>
-     <div class="bub">나 숏폼 만드는 거 이거 공문 찾아가지고 공모 좀 내야 돼</div><div class="who2">내가 한 말 그대로</div>
-     <div class="bubai"><b>AI</b> 받은 공문에서 찾았어요. 영상 2~3분, 마감은 사흘 뒤예요. 연수 이수 기록으로 보면 자격도 됩니다.</div>
-     <div class="bubai" style="margin-left:auto;background:#1d1b17;color:#f6f3ee;border:0">이걸로 가자</div></div>
-     <div class="docc"><div class="hd o">AI가 요강에서 뽑은 것</div><h4>교사 우수사례 영상 공모</h4>
-       <div class="kv"><b>주제</b><span>연수로 시작된 작지만 확실한 교실 속 변화</span><b>형식</b><span>2~3분 영상</span><b>심사</b><span>연계성·구체성·확산성·전달력</span></div>
-       <div class="bars"><div>연계성<i style="width:100%"></i></div><div>구체성<i style="width:100%"></i></div><div>확산성<i style="width:66%"></i></div><div>전달력<i style="width:66%"></i></div></div>
-       <div class="warn">⚠ 허위 사실이 있으면 수상 취소 → 모든 말에 근거가 있어야 한다</div></div></div>` },
- { h: '재료는 <em>이미 폴더에</em> 있었습니다.', sub: 'AI가 지어낸 게 아니라 내 수업 자료를 읽은 겁니다. 이게 제일 중요합니다.',
-   title: '수업 자료 폴더', tag: '실제 파일 목록',
-   body: `<div class="g2 w"><div>
-     ${[['PDF', '교수·학습 과정안', '탐구 질문 원문 · 24명 · 15차시'], ['PPT', '공개수업 PPT', '여행 친구 "민우" 설정 · 아이들이 따진 것'], ['TXT', '성찰회 발표 대본', '연수에서 무엇을 알게 됐는지 내 말'], ['PDF', '연수 자료 65쪽', '구글도구 활용 수업 강의'], ['XLS', '연수 목록', '이수 날짜 2026.5.10.'], ['IMG', '학생 결과물', '구글 어스 · 패들렛 · 캔바']].map(f => `<div class="fl"><span class="x">${f[0]}</span><div><b>${f[1]}</b><span>${f[2]}</span></div></div>`).join('')}</div>
-     <div style="display:flex;flex-direction:column;justify-content:center;gap:14px">
-       <div class="qt">"구글 활용 도구 연수를 갔는데요, 거기에서 구글맵과 구글어스를 이용한 슬라이드쇼 기능을 알게 됩니다."<div style="font-size:11.5px;color:#8a8478;margin-top:4px">성찰회 발표 대본 → 영상의 "연수 → 수업" 근거</div></div>
-       <div class="big1" style="color:#cfc8bb">수업하면서 만든 자료가 한곳에 있어서, AI가 <b style="color:var(--or2)">내 수업의 사실</b>만으로 쓸 수 있었습니다.</div></div></div>` },
- { h: 'AI가 <em>쓰면 안 되는 것</em>부터 적었습니다.', sub: '자료를 다 읽고 쓸 사실과 쓰면 안 되는 말을 나눴습니다. 헷갈리는 건 나한테 물었습니다.',
-   title: '영상 명세서.md', tag: '실제 내용 요약', light: 1,
-   body: `<div class="g2"><div class="docc"><div class="hd o">쓰면 안 되는 말</div>
-     <div class="li no">"구글 어스를 연수에서 처음 알았다"<small>그 전 PPT에 이미 있음 → '슬라이드쇼로 여행 계획 짜기'만 말함</small></div>
-     <div class="li no">"○차시 수업에서"<small>과정안 안에서도 차시가 엇갈림 → 날짜로만</small></div>
-     <div class="li no">방탈출 캐릭터 이름<small>저작권</small></div>
-     <div class="li no" style="border:0">학생 얼굴·이름·목소리<small>실제 사진은 꼭 필요한 순간만, 흐리게</small></div></div>
-     <div class="docc"><div class="hd o">쓸 수 있는 사실</div>
-     <div class="li ok">연수 2026.5.10. · 6시간</div><div class="li ok">탐구 질문 원문 그대로</div><div class="li ok">민우: 13살, 휠체어, 사진 찍기 좋아함</div><div class="li ok">여행지: 런던 · 파리 · 오사카</div>
-     <div class="hd" style="margin-top:9px">AI가 물은 것 → 내가 답함</div><div style="font-size:12.5px">민우 나이는? 방탈출은 무슨 과목? 6모둠 여행지는?</div></div></div>` },
- { h: '문장마다 <em>근거</em>를 달았습니다.', sub: 'AI가 초안을 쓰고, 근거 없는 말은 스스로 고쳤습니다. 바꾼 16곳과 그 이유까지 남겼습니다.',
-   title: '대본.md · 초안 → 확정', tag: '실제 내용', light: 1,
-   body: `<div class="g2 w"><div>
-     <div class="df"><div class="s">장면 3</div><del>아이들이 제일 먼저 찾은 건 맛집도 관광지도 아니었습니다. 엘리베이터와 경사로였죠.</del><ins>아이들이 여행지마다 따진 건 따로 있었습니다. 엘리베이터와 장애인 화장실, 그리고 휠체어로 갈 수 있는지였죠.</ins><div class="why">"제일 먼저", "경사로"는 자료에 없음</div></div>
-     <div class="df"><div class="s">장면 11</div><del>아이들은 서로의 여행을 민우의 눈으로 봤습니다</del><ins>아이들은 교실을 돌며 서로의 여행 계획을 살폈습니다</ins><div class="why">근거 없는 해석 → 사실(갤러리워크)로</div></div></div>
-     <div><div class="hd">대본 속 모습</div><div class="code"><span class="k">장면 1</span> · 0:00–0:06.8
+// 화면마다: kick, h(제목), p(한 줄), title(창 제목), tag(실제/재현), html(), on()(그린 뒤)
+const SC = [];
+
+const MAP = [
+  `${chip('me')}한마디 ${chip('cc')}공문 찾고 요강 정리`,
+  `${chip('me')}원래 있던 수업 자료 ${chip('cc')}폴더째 읽기`,
+  `${chip('cc')}쓸 사실·쓰면 안 될 말 정리 ${chip('me')}물음에 답`,
+  `${chip('cc')}문장마다 근거를 단 대본`,
+  `${chip('me')}참고할 유튜브 두 개 고르기`,
+  `${chip('me')}"플로우 세팅해" ${chip('cc')}도식 영상, Flow에 프롬프트 입력, 후보 고르기 ${chip('fl')}그림→영상`,
+  `${chip('cc')}컴퓨터 목소리로 먼저 이어 붙이기`,
+  `${chip('me')}녹음 ${chip('cc')}자막·장면 길이 맞추기, 음질 다듬기`,
+  `${chip('me')}"이거 고쳐" ${chip('cc')}고친 판 만들기 ×7`,
+  `${chip('cc')}제출 글 초안 ${chip('me')}확인하고 제출`,
+];
+SC[0] = {
+  kick: '전체 흐름', h: '누가 무엇을 했는지 <em>한 장</em>으로 보면',
+  p: '나는 말하고, 고르고, 녹음했습니다. 파일을 읽고 만드는 일은 클로드 코드가, 그림과 영상은 Flow가 했습니다. 칸을 누르면 그 단계로 갑니다. 말풍선은 실제로 친 말 그대로라 "어어" 같은 군말도 섞여 있습니다.',
+  title: '한눈에 보기', tag: ['요약', 0],
+  html: () => `<div class="tools">
+      <div class="card"><b>${chip('me')}나</b><p>말로 시키기, 참고 영상·배경 곡 고르기, 내 목소리 녹음, 마지막 확인과 제출.</p></div>
+      <div class="card"><b>${chip('cc')}클로드 코드</b><p>내 컴퓨터에서 돌아가는 AI 비서. 말로 시키면 폴더 속 파일을 읽고, 글·영상 파일을 만들고, 크롬도 대신 움직입니다.</p></div>
+      <div class="card"><b>${chip('fl')}Flow</b><p>구글의 AI 영상 만들기 사이트(labs.google/flow). 글로 장면을 설명하면 그림을 그리고, 그 그림을 8초짜리 영상으로 움직입니다. AI에게 주는 이런 글 지시를 '프롬프트'라고 합니다.</p></div>
+    </div>
+    <div class="map">${ST.map((s, i) => `<button data-go="${i + 1}"><span class="n">${String(i + 1).padStart(2, '0')}</span><span class="t">${s.t}</span><span class="d">${MAP[i]}</span></button>`).join('')}</div>`,
+  on: () => document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => { click(); go(+b.dataset.go); }),
+};
+
+SC[1] = {
+  kick: '1단계 · 공모 찾기', h: '<em>한마디</em>로 시작했습니다.',
+  p: '받은 공문 더미는 클로드 코드가 뒤져 찾고, 낼지 말지는 내가 정했습니다.',
+  title: '클로드 코드와 나눈 대화', tag: ['재현 · 말은 실제 그대로', 0],
+  html: () => `<div class="cols c2">
+    <div>
+      ${said('나 쇼폰 만드는 거 이거 공문 찾아가지고 공모 좀 내야 돼', '11월 10일 · 말로 입력해서 \'숏폼\'이 \'쇼폰\'으로 찍힘')}
+      <div class="ai-say">클로드 코드 · 받은 공람 문서에서 찾았어요</div>
+      <div class="doc">
+        <h3>2026 디지털기반 교원역량강화연수 우수사례 동영상 공모전</h3>
+        <div class="kv">
+          <b>주제</b><span>연수를 통해 시작된 작지만 확실한 교실 속 변화</span>
+          <b>형식</b><span>2~3분 영상 (또는 카드뉴스 8쪽)</span>
+          <b>마감</b><span>11월 13일(금) 18:00 · 구글폼</span>
+          <b>자격</b><span>AI융합교육원 직무연수 이수자 → <em>5/10 연수로 됨</em></span>
+        </div>
+        <div class="bars">
+          <div>연계성 30<i style="width:100%"></i></div><div>구체성 30<i style="width:100%"></i></div>
+          <div>확산성 20<i style="width:66%"></i></div><div>전달력 20<i style="width:66%"></i></div>
+        </div>
+        <div class="warn">⚠ 허위 사실이 있으면 수상 취소</div>
+      </div>
+    </div>
+    <div class="card" style="align-self:start">
+      <div class="lab o">이 단계에서</div>
+      <p class="big">${chip('me')}"공모 내야 돼" 한마디, 그리고 낼 공모 결정</p>
+      <p class="big" style="margin-top:12px">${chip('cc')}공문 찾기, 요강에서 마감·자격·심사 기준 뽑기, 이수 기록으로 자격 확인</p>
+      <p class="mid muted" style="margin-top:22px">마지막 줄 <b style="color:var(--or3)">"허위 사실 = 수상 취소"</b>를 보고, 영상의 모든 말에 근거를 달기로 했습니다.</p>
+    </div>
+  </div>`,
+};
+
+const FILES = [
+  ['PDF', '교수·학습 과정안', '탐구 질문 원문 · 6학년 24명 · 사회·도덕·국어 15차시'],
+  ['PPT', '공개수업 PPT', '여행 친구 "민우" 설정(4쪽) · 아이들이 따진 것(15쪽)'],
+  ['TXT', '성찰회 발표 대본 (11월 3일)', '연수에서 구글맵·구글어스 슬라이드쇼 기능을 알게 된 이야기'],
+  ['PDF', '연수 자료 65쪽', '「질문과 참여가 살아나는 구글도구 활용 수업」'],
+  ['XLS', '연수 목록', '이수 번호 · 날짜 2026.5.10. → 자격 확인'],
+  ['IMG', '학생 결과물', '구글 어스 슬라이드쇼 · 패들렛 · 캔바 보완 계획'],
+];
+SC[2] = {
+  kick: '2단계 · 재료 모으기', h: '재료는 <em>이미 폴더에</em> 있었습니다.',
+  p: '클로드 코드가 지어낸 게 아니라 내 수업 자료 폴더를 읽은 겁니다. 그래서 지어낸 말이 없습니다.',
+  title: '내 컴퓨터 · 수업 자료 폴더', tag: ['실제 파일 목록', 1],
+  html: () => `<div class="cols c2">
+    <div class="tree">${FILES.map((f, i) => `<div class="file" style="animation-delay:${i * .12}s"><span class="ext">${f[0]}</span><div><b>${f[1]}</b><span>${f[2]}</span></div></div>`).join('')}</div>
+    <div class="arrowbox">
+      <div class="card">
+        <div class="lab o">왜 중요한가</div>
+        <p class="big">${chip('me')}수업할 때 만든 자료가 내 일지 폴더에 남아 있었기 때문에, ${chip('cc')}가 <em>내 수업의 사실</em>만 가지고 대본을 쓸 수 있었습니다.</p>
+      </div>
+      <div class="quote">"구글 활용 도구 연수를 갔는데요, 거기에서 구글맵과 구글어스를 이용한 슬라이드쇼 기능을 알게 됩니다."
+        <div class="small" style="margin-top:6px">성찰회 발표 대본 → 영상의 "연수 → 수업" 연결 근거가 됨</div></div>
+      <p class="mid muted">따라 하려면: 수업 자료를 한곳에 모아 두기. 지도안, PPT, 발표 대본, 학생 결과물.</p>
+    </div>
+  </div>`,
+};
+
+SC[3] = {
+  kick: '3단계 · 사실 정리', h: '<em>쓰면 안 되는 말</em>부터 정리했습니다.',
+  p: '클로드 코드가 자료를 다 읽고 쓸 수 있는 사실과 쓰면 안 되는 말을 나눴습니다. 헷갈리는 건 나한테 물었습니다.',
+  title: '영상 명세서 (클로드 코드가 만든 글 파일 · 쓸 말과 뺄 말 정리)', tag: ['실제 내용', 1],
+  html: () => `<div class="cols c2">
+    <div class="card">
+      <div class="lab o">쓰면 안 되는 말</div>
+      <ul class="no">
+        <li>"구글 어스를 연수에서 처음 알았다"<small>4월 30일 PPT에 이미 구글 어스가 있음 → 연수에서 얻은 건 '슬라이드쇼로 여행 계획 짜기'로만 말함</small></li>
+        <li>"○차시 수업에서…"<small>과정안 안에서도 8차시·11차시가 엇갈림 → 날짜(6월 16일)로만 말함</small></li>
+        <li>방탈출의 캐릭터 이름<small>저작권 → "구글 폼으로 방탈출을 만들었고"까지만</small></li>
+        <li>학생 얼굴·이름·목소리<small>실제 사진은 꼭 필요한 순간만, 흐리게</small></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="lab o">쓸 수 있는 사실</div>
+      <ul class="ok">
+        <li>연수 2026.5.10. 구글코리아, 6시간</li>
+        <li>탐구 질문 원문 그대로</li>
+        <li>민우: 13살, 휠체어, 사진 찍기·맛있는 음식 좋아함</li>
+        <li>여행지: 런던 · 파리 · 오사카</li>
+        <li>설문 9명 → 12명</li>
+      </ul>
+      <div class="lab" style="margin-top:18px">${chip('cc')}가 나에게 물은 것</div>
+      <p class="mid muted">민우 나이는? 방탈출은 무슨 과목? 6모둠 여행지는? → ${chip('me')}내가 답한 것만 대본에 들어감</p>
+    </div>
+  </div>`,
+};
+
+SC[4] = {
+  kick: '4단계 · 대본', h: '문장마다 <em>근거</em>를 달았습니다.',
+  p: '클로드 코드가 초안을 쓰고, 근거 없는 말은 스스로 고쳤습니다. 바꾼 문장 16곳과 그 이유까지 남겼습니다.',
+  title: '대본 (클로드 코드가 만든 글 파일) · 초안과 확정본', tag: ['실제 내용', 1],
+  html: () => `<div class="cols c2">
+    <div class="diff">
+      <div class="dif"><div class="s">장면 3</div>
+        <del>아이들이 제일 먼저 찾은 건 맛집도, 관광지도 아니었습니다. 엘리베이터와 경사로였죠.</del>
+        <ins>아이들이 여행지마다 따진 건 따로 있었습니다. 엘리베이터와 장애인 화장실, 그리고 휠체어로 갈 수 있는지였죠.</ins>
+        <div class="why">"제일 먼저"와 "경사로"는 자료에 없음 → PPT 15쪽 목록으로</div></div>
+      <div class="dif"><div class="s">장면 1</div>
+        <del>우리 반 아이들이 이번 학기에 함께 여행한 친구</del>
+        <ins>우리 반 24명이 올해 함께 여행한 친구</ins>
+        <div class="why">수업은 1학기, 제출은 11월 → "이번 학기"는 틀린 말</div></div>
+      <div class="dif"><div class="s">장면 11</div>
+        <del>아이들은 서로의 여행을 민우의 눈으로 봤습니다</del>
+        <ins>아이들은 교실을 돌며 서로의 여행 계획을 살폈습니다</ins>
+        <div class="why">"민우의 눈으로"는 근거 없는 해석이라, 교실을 돌며 서로 살펴본 활동(갤러리워크)이라는 사실로 고침</div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="lab o">대본 속 모습 · 회색 줄은 문장마다 단 근거 메모</div>
+      <div class="code"><span class="k">장면 1</span> · 0:00–0:06.8 · 큰 자막: 13살, 휠체어를 타는 민우
 - 13살, 휠체어를 타는 민우.
-  <span class="c">&lt;!-- 근거: 명세 25줄 "민우 (13세)
-  휠체어를 사용해요" --&gt;</span>
-- 우리 반 24명이 올해 함께
-  여행한 친구입니다.
-  <span class="c">&lt;!-- 근거: 명세 24줄 "24명" --&gt;</span></div></div></div>` },
- { h: '<em>말투</em>와 <em>그림</em>은 내가 골랐습니다.', sub: '좋아하는 유튜브 두 개를 골라 "이 느낌으로". 말은 정보 다큐처럼, 그림은 어두운 3D 다큐처럼.',
-   title: '레퍼런스에서 뽑은 결 → 완성 장면', tag: '실제 결과물 캡처',
-   body: `<div class="g2 w"><img class="im" src="img/f3.jpg" alt="">
-     <div><div class="hd o">말투</div><div style="font-size:13px;margin-bottom:8px">숫자·질문으로 열고 담담하게 → "13살, 휠체어를 타는 민우."</div>
-     <div class="hd o">그림</div>
-     <div class="rl"><b>①</b><span>어둡고 따뜻한 화면, 부드러운 빛</span></div><div class="rl"><b>②</b><span>빛나는 주황 선이 원리를 그림</span></div>
-     <div class="rl"><b>③</b><span>검은 바탕에 크고 굵은 흰 글씨</span></div><div class="rl"><b>④</b><span>하단 작은 흰 자막</span></div><div class="rl"><b>⑤</b><span>천천히 다가가는 카메라</span></div>
-     <div style="font-size:11.5px;color:#8a8478;margin-top:6px">금지: 밝은 인포그래픽 · 파스텔 · 귀여운 아이콘</div></div></div>` },
- { h: '장면 16개: <em>AI가 만들고</em>, 내가 고르고.', sub: '도식은 AI가 코드로 그려 영상으로 뽑고, 인물은 Google Flow로. 그림 후보는 여러 장 뽑아 내가 골랐습니다.',
-   title: '장면 하나가 만들어지는 길', tag: '실제 결과물',
-   body: `<div class="t4">
-     <div class="c"><div class="hd o">AI · 코드로 그린 도식</div><video src="clip/scene06.mp4" muted loop autoplay playsinline></video><p>HTML로 짜서 한 프레임씩 찍어 mp4로</p></div>
-     <div class="c"><div class="hd">나 · 그림 후보에서 고르기</div><div class="pk"><div class="no"><img src="img/c_09_민우_1.jpg" alt=""></div><div class="yes"><img src="img/c_09_민우_2.jpg" alt=""></div></div><p>장면마다 2~4장 뽑아 고름</p></div>
-     <div class="c"><div class="hd o">Flow · 그림을 영상으로</div><video src="clip/flow09.mp4" muted loop autoplay playsinline></video><p>8초 클립. 무료는 하루 크레딧만큼</p></div>
-     <div class="c"><div class="hd o">AI · 글씨와 합치기</div><img src="img/f76.jpg" alt=""><p>클립 위에 제목·설명을 얹어 완성</p></div></div>` },
- { h: '녹음 전에 <em>AI 목소리로 먼저</em> 붙여 봤습니다.', sub: 'TTS로 2분 36초 가조립. 장면 길이와 박자를 여기서 미리 맞췄습니다.',
-   title: '가조립.mp4 · TTS 목소리', tag: '실제 결과물',
-   body: `<div class="g2 w"><video src="clip/gajorip.mp4" controls playsinline style="width:100%;height:100%;object-fit:contain;background:#000;border-radius:8px"></video>
-     <div style="display:flex;flex-direction:column;justify-content:center;gap:10px">
-       <div class="hd o">장면 16개 길이 (초)</div>
-       <div class="tl">${[6.8, 5.9, 11.9, 3.0, 10.0, 16.6, 3.0, 5.4, 13.1, 15.7, 14.0, 3.5, 9.2, 7.2, 17.9, 13.4].map((d, i) => `<div class="${[3, 6, 11].includes(i) ? 'ep' : ''}" style="flex:${d}">${i + 1}</div>`).join('')}</div>
-       <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;color:#8a8478"><span>0:00</span><span>2:36.6</span></div>
-       <div class="big1" style="color:#cfc8bb">자막 40줄과 장면 길이가 이 목소리 기준으로 먼저 정해지고, 내 녹음이 오면 다시 맞춥니다.</div></div></div>` },
- { h: '목소리는 <em>내 목소리</em>로.', sub: '나는 대본을 읽어 녹음만. AI가 받아쓰기로 문장마다 시각을 찾아 자막과 장면 길이를 내 말에 맞췄습니다.',
-   title: '녹음 → 맞추기 → 다듬기', tag: '재현',
-   body: `<div style="display:flex;flex-direction:column;gap:12px;height:100%">
-     <svg viewBox="0 0 700 70" style="width:100%;height:70px;flex:none" id="wave"></svg>
-     <div class="g2" style="height:auto">
-       <div><div class="hd o">AI가 맞춘 것</div><div class="ch"><span>내 녹음</span><i>→</i><span>받아쓰기</span><i>→</i><span>문장마다 시각</span><i>→</i><span>자막·장면 길이</span></div>
-         <div style="font-size:11.5px;color:#8a8478;margin-top:6px">어긋남 2프레임(0.07초) 안 · 0.7초 넘는 쉼은 0.7초로 줄여 3분 안에</div></div>
-       <div><div class="hd o">목소리 다듬기</div><div class="ch"><span>잡음 제거</span><i>→</i><span>파열음 줄이기</span><i>→</i><span>또렷하게</span><i>→</i><span>크기 고르게</span><i>→</i><span>작은 방 울림</span></div></div></div>
-     <div style="font-size:13px;color:#cfc8bb"><span class="me1" style="background:#f1ebe1;color:#141210">나</span>코맹맹이·파열음이 거슬려서 차 안에서 마이크와 거리를 두고 다시 녹음했습니다.</div></div>` },
- { h: '한 번에 안 나왔습니다. <em>일곱 판</em>.', sub: '고칠 점은 내가 말하고, 고치는 건 AI가. 마음에 안 들면 녹음 단계로 다시 돌아갔습니다.',
-   title: '판마다 바뀐 것', tag: '실제 기록', light: 1,
-   body: `<div class="g2"><div>${[
-     ['가조립', '2:36', 0, 'TTS 목소리로 박자 맞춤'], ['녹음 1', '2:44', 0, '첫 녹음. 틀린 곳 3군데 잘라 냄'], ['녹음 2', '2:43', 1, '"헛기침 빼 줘" → 잘라 냄'], ['녹음 3', '2:52', 1, '차에서 다시 녹음 · 곡 4개 30초씩 듣고 고름']].map(v => `<div class="vr"><b>${v[0]}</b><span class="d">${v[1]}</span><span>${v[2] ? '<span class="me1">나</span>' : ''}${v[3]}</span></div>`).join('')}</div>
-     <div>${[['녹음 4', '2:52', 1, '"배경음이 작고 목소리가 커" → 크기 다시'], ['수정', '2:52', 1, '"짧은 구간이 너무 반복돼" → 곡 바꿈'], ['수정 2', '2:52', 1, '"너무 슬프다" → 밝은 곡으로. 이걸 냄']].map(v => `<div class="vr"><b>${v[0]}</b><span class="d">${v[1]}</span><span>${v[2] ? '<span class="me1">나</span>' : ''}${v[3]}</span></div>`).join('')}
-     <div style="font-size:11.5px;color:#9a8f80;margin-top:8px">하루 밤과 오후 동안. 매번 30초 맛보기를 먼저 듣고 고름</div></div></div>` },
- { h: '나흘 만에 <em>2분 52초</em>.', sub: '내가 한 일은 고르기, 확인하기, 녹음하기, 그리고 "이거 너무 슬프다" 같은 말.',
-   title: '완성 영상 장면들', tag: '실제 결과물 캡처',
-   body: `<div class="g2 w" style="grid-template-columns:1fr 150px"><div class="fg">${['f3', 'f10', 'f25', 'f55', 'f60', 'f76'].map(f => `<img class="im" src="img/${f}.jpg" alt="">`).join('')}</div>
-     <div class="st3"><div><b>4일</b><span>공문 찾기 → 제출</span></div><div><b>16개</b><span>장면</span></div><div><b>7판</b><span>가조립 → 수정 2</span></div></div></div>` },
-];
+  <span class="c">&lt;!-- 근거: 명세 25줄 "민우 (13세) 휠체어를 사용해요" --&gt;</span>
+- 우리 반 24명이 올해 함께 여행한 친구입니다.
+  <span class="c">&lt;!-- 근거: 명세 24줄 "6학년 3반 24명" --&gt;</span></div>
+      <p class="mid muted">근거 메모는 영상에 나오지 않습니다. 말이 사실인지 확인하는 용도입니다. "명세 25줄"은 3단계 정리 파일의 25번째 줄이라는 뜻입니다.</p>
+    </div>
+  </div>`,
+};
 
-// ── 효과음 (nerv-flow와 같은 소리)
-let soundOn = !matchMedia('(pointer:coarse)').matches && !/mute/.test(location.search), ac = null, noise = null, lastClick = 0;
+SC[5] = {
+  kick: '5단계 · 느낌 정하기', h: '<em>말투</em>와 <em>그림</em>은 내가 골랐습니다.',
+  p: '참고할 유튜브 두 개를 골라 "이 느낌으로"라고 했습니다. 말은 정보 다큐(서재로36), 그림은 어두운 3D 다큐(신비한 건축사전).',
+  title: '참고 영상의 느낌으로 만든 완성 영상 장면', tag: ['실제 장면', 1],
+  html: () => `<div class="cols c2">
+    <div class="frames">
+      <img class="wide" src="img/f3.jpg" alt="">
+      <img src="img/f55.jpg" alt=""><img src="img/f60.jpg" alt="">
+    </div>
+    <div class="card" style="align-self:start">
+      <p class="small" style="margin-bottom:6px">클로드 코드가 참고 영상을 보고 어두운 3D 느낌을 제안하자 한 대답</p>${said('ㅇㅇ 신비한 건축 느낌으로 어어.', '11월 11일 새벽')}
+      <div class="lab o">말투</div>
+      <p class="mid">숫자와 질문으로 열고, 담담하게. → "13살, 휠체어를 타는 민우."</p>
+      <div class="lab o" style="margin-top:16px">그림 · 참고 영상에서 뽑은 다섯 가지</div>
+      <div class="rule"><b>①</b><span>어둡고 따뜻한 화면, 부드러운 빛, 옅은 먼지</span></div>
+      <div class="rule"><b>②</b><span>원리를 빛나는 주황 선이 흐르며 그림</span></div>
+      <div class="rule"><b>③</b><span>검은 바탕에 크고 굵은 흰 글씨</span></div>
+      <div class="rule"><b>④</b><span>하단 작은 흰 자막</span></div>
+      <div class="rule"><b>⑤</b><span>천천히 다가가는 카메라</span></div>
+      <p class="small" style="margin-top:12px">금지: 밝은 인포그래픽, 파스텔, 귀여운 아이콘, 튀는 효과. 이 규칙이 다음 단계 Flow 프롬프트에 그대로 들어갑니다.</p>
+    </div>
+  </div>`,
+};
+
+SC[6] = {
+  kick: '6단계 · 장면 만들기', h: '그림·영상은 <em>Flow</em>, 프롬프트 입력은 <em>클로드 코드</em>.',
+  p: '나는 "플로우 세팅하고"라고 하고 Flow 첫 화면 동의만 눌렀습니다. 클로드 코드가 브라우저로 Flow를 열고 프롬프트를 직접 쳤습니다. 동화책 그림체로 시작했다가 3D로 바꿨습니다. 그림 후보 고르기, 도식과 글씨도 클로드 코드가 했습니다.',
+  title: '장면이 만들어지는 길', tag: ['실제 기록', 1],
+  html: () => `
+  ${said('야 공모전 영상 마저 만들자. 1 플로우 이런 세팅 하고 …', '11월 11일 0시 53분')}
+  <div class="evo">
+    <div><img src="img/minwoo_ref.png" alt="수업 때 만든 민우 그림"><p class="small" style="margin-top:6px">처음 넣은 민우 그림 (수업 때 제미나이로 만든 캐릭터)</p></div>
+    ${typed('첨부한 민우 그림과 똑같은 캐릭터, 똑같은 그림체(따뜻한 동화책 일러스트, 굵은 외곽선)로 16:9 이미지를 1장 만들어 줘. 장면: 초록 후드티를 입고 휠체어에 앉은 13살 남자아이 민우가 화면 가운데에서 정면을 보며 살짝 웃고 있다. … 글자, 말풍선, 로고는 절대 넣지 마.', '1시 4분')}
+    ${typed('그림체를 완전히 바꾸자. 동화책 그림체 말고, 어둡고 따뜻한 조명의 시네마틱 3D 렌더(… 깊은 그림자, 부드러운 빛줄기, 공기 중 먼지 입자 …)로 … (1) 검은 공간, 위에서 내려오는 따뜻한 빛줄기 하나 아래 휠체어에 앉은 13살 한국 남자아이 … 정면, 차분한 미소.', '1시 13분')}
+    <div><img src="img/s01_3d.jpg" alt="3D로 바꾼 민우"><p class="small" style="margin-top:6px">위 프롬프트로 나온 3D 그림 (동화책 그림체는 버림)</p></div>
+  </div>
+  <div class="cols c2" style="height:auto;margin-top:14px;align-items:center">
+    ${typed('좋아, 이 그림체가 딱 맞아. 방금 만든 3D 이미지 3장을 각각 첫 프레임으로 써서 16:9 동영상 클립 3개를 만들어 줘 (Veo 3.1 Lite, 각 8초 …). 움직임은 아주 느리고 단순하게, 얼굴·손 모양이 바뀌지 않게. … (1) 민우 빛줄기 장면: 카메라가 천천히 앞으로 다가가고, 먼지 입자가 빛 속에서 떠다니며, 민우가 살짝 고개를 들고 미소 짓는다.', '1시 16분')}
+    <div><video src="clip/flow01.mp4" muted loop autoplay playsinline style="width:100%"></video><p class="small" style="margin-top:6px">${chip('fl')}그렇게 나온 8초 클립 (장면 1)</p><p class="small" style="margin-top:4px">Veo = Flow 안에서 영상을 만드는 AI · 16:9 = 가로 화면 · 첫 프레임 = 영상의 첫 장면 그림</p></div>
+  </div>
+  <div class="lab o" style="margin-top:22px">장면 16개는 이렇게 나눠 만들었습니다</div>
+  <div class="tiles">
+    <div class="tile"><div class="lab">${chip('cc')}코드로 그린 도식</div>
+      <video src="clip/scene06.mp4" muted loop autoplay playsinline></video>
+      <p>장면 6. 빛나는 선이 연수에서 배운 순서를 그림. 클로드 코드가 움직이는 그림을 코드로 짜고 영상 파일로 바꿈</p></div>
+    <div class="tile pick"><div class="lab">${chip('cc')}Flow 그림 후보에서 고르기</div>
+      <div class="pk"><div class="no"><img src="img/c_09_민우_1.jpg" alt=""></div><div class="yes"><img src="img/c_09_민우_2.jpg" alt=""></div></div>
+      <p>장면 3·9·13·15는 후보를 2~4장씩 뽑아 클로드 코드가 고름. 인물은 처음 민우 그림을 기준으로</p></div>
+    <div class="tile"><div class="lab">${chip('fl')}고른 그림을 영상으로</div>
+      <video src="clip/flow09.mp4" muted loop autoplay playsinline></video>
+      <p>8초짜리 클립. 무료로는 하루에 만들 수 있는 양(크레딧 50)이 정해져 있어 하루에 몇 개씩</p></div>
+    <div class="tile"><div class="lab">${chip('cc')}글씨·자막과 합치기</div>
+      <img src="img/f76.jpg" alt="">
+      <p>클립 위에 큰 제목과 민우 설명 글씨를 얹어 장면 완성</p></div>
+  </div>
+  <p class="mid muted" style="margin-top:22px">실제 수업 사진은 꼭 필요한 순간(공개수업, 학습지)에만, 얼굴은 흐리게. 학생 사진은 AI에 넣지 않았습니다.</p>`,
+};
+
+const TIMES = [6.8, 5.9, 11.9, 3.0, 10.0, 16.6, 3.0, 5.4, 13.1, 15.7, 14.0, 3.5, 9.2, 7.2, 17.9, 13.4];
+const EPS = { 4: 'EP1', 7: 'EP2', 12: 'EP3' };
+SC[7] = {
+  kick: '7단계 · 미리 붙여 보기', h: '녹음하기 전에 <em>컴퓨터 목소리로 먼저</em> 붙여 봤습니다.',
+  p: '클로드 코드가 TTS(글을 읽어 주는 컴퓨터 목소리)로 2분 36초짜리 임시 영상을 만들었습니다. 장면 길이와 박자를 여기서 미리 맞췄습니다. 아래 영상은 그중 앞 12초입니다.',
+  title: '미리 붙여 본 영상 · 앞 12초 · 컴퓨터 목소리', tag: ['실제 영상', 1],
+  html: () => `<div style="display:flex;flex-direction:column;height:100%;min-height:0">
+    ${said('… 2 워크플로 돌려서 개빡세게 만들어보자 어어', '11월 11일 0시 53분 · 워크플로 = 클로드 코드가 여러 AI 일꾼을 한꺼번에 돌리는 기능')}
+    <div style="flex:1;min-height:0"><video class="vfill" src="clip/gajorip.mp4" controls preload="metadata"></video></div>
+    <div class="tl">${TIMES.map((d, i) => `<div class="${EPS[i + 1] ? 'ep' : ''}" style="flex:${d};animation-delay:${i * .05}s" title="장면 ${i + 1} · ${d}초">${EPS[i + 1] || i + 1}</div>`).join('')}</div>
+    <div class="tlax"><span>0:00</span><span>칸 = 장면 16개 · EP = 큰 제목 장면(연수·질문·변화) · 자막 39줄</span><span>2:36.6</span></div></div>`,
+};
+
+SC[8] = {
+  kick: '8단계 · 내 목소리', h: '녹음은 <em>내 목소리</em>로 직접 했습니다.',
+  p: '나는 대본을 읽어 녹음만 했습니다. 클로드 코드가 받아쓰기로 문장마다 시각을 찾아 자막과 장면 길이를 내 말에 맞췄습니다.',
+  title: '내 녹음 → 자막·음질', tag: ['실제 기록', 1],
+  html: () => `<div class="cols c2">
+    <div>
+      ${said('야 녹음본 다시줄게 잘 해줘봐 어어 일단 그 대본띄워봐', '11월 12일 밤')}
+      ${said('5번으로 가자. 파열음 뿐만아니라 음질 좀 만져줄수있음? 너무 날것 어어', '11월 12일 밤')}
+      <p class="mid muted" style="margin-top:6px">${chip('me')}코맹맹이·파열음이 거슬려서 마이크와 거리를 두고 다시 녹음했습니다.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="card"><div class="lab o">${chip('cc')}가 맞춘 것</div>
+        <div class="chain"><span>내 녹음</span><i>→</i><span>받아쓰기</span><i>→</i><span>문장마다 시각</span><i>→</i><span>자막·장면 길이 맞춤</span></div>
+        <p class="small" style="margin-top:8px">자막과 말소리 차이 0.07초 안. 0.7초 넘게 쉰 곳은 0.7초로 줄여 3분 안에 맞춤</p></div>
+      <div class="card"><div class="lab o">${chip('cc')}목소리 다듬기</div>
+        <div class="chain"><span>잡음 제거</span><i>→</i><span>파열음 줄이기</span><i>→</i><span>따뜻하게·또렷하게</span><i>→</i><span>크기 고르게</span><i>→</i><span>작은 방 울림</span></div></div>
+    </div>
+  </div>`,
+};
+
+const VERS = [
+  ['임시 영상', '2:36', '컴퓨터 목소리로 박자 맞춤'],
+  ['녹음 1', '2:44', '첫 녹음. 틀린 곳 3군데 잘라 냄'],
+  ['녹음 2', '2:43', '헛기침 잘라 냄, 클로드 코드가 만든 피아노 배경음'],
+  ['녹음 3', '2:52', '내가 다시 녹음(3:08을 쉰 곳 줄여 2:52로), 클로드 코드가 곡 4개 맛보기'],
+  ['녹음 4', '2:52', '<q>좀 파열음이 큰데? 음악 더 키우고 내 음량 줄여</q> → 활기찬 곡 4개 중 내가 5번 고름, 목소리 다듬기'],
+  ['녹음 5', '2:52', '장면 7에 Flow 클립(칠판 물음표) 넣음 → 첫 제출'],
+  ['수정', '2:52', '곡이 짧게 반복돼서 → 곡 바꿈'],
+  ['수정 2', '2:52', '곡이 너무 슬퍼서 → 밝은 곡으로 바꿔 다시 제출'],
+];
+SC[9] = {
+  kick: '9단계 · 고치기', h: '임시 영상 뒤로 <em>일곱 번</em> 고쳐 만들었습니다.',
+  p: '고칠 점은 내가 말로 하고, 고치는 건 클로드 코드가 했습니다.',
+  title: '버전마다 바뀐 것', tag: ['실제 기록', 1],
+  html: () => `<div class="cols c2">
+    <div class="vlist"><div class="vrow" style="background:none;border:0;padding:0 14px"><span class="small">버전</span><span class="small">길이</span><span class="small">바뀐 것 (따옴표 = 내가 한 말)</span></div>${VERS.map(x => `<div class="vrow"><b>${x[0]}</b><span class="d">${x[1]}</span><span class="x">${x[2]}</span></div>`).join('')}
+      <p class="small" style="margin-top:6px">11월 12일 오후 ~ 13일 오전. 한 번 낸 뒤 곡만 바꿔 다시 냄</p></div>
+    <div class="card" style="align-self:start">
+      <div class="lab o">고칠 때 한 말은 이 정도입니다</div>
+      ${said('좀 파열음이 큰데? 음악 더 키우고 내 음량 줄여 어어 음악이 너무 잔잔해 좀더 느좋 활기찬 느낌? 어쿠스틱정도 바이브?', '11월 12일 밤')}
+      ${said('야 좋은데 분량 넘친거 아니냐? 어 한번 검증하고', '11월 12일 밤')}
+      <p class="mid muted">${chip('cc')}음악 크기·곡·길이를 바꾼 새 판을 만들고, 3분을 넘지 않는지 재서 알려 줌</p>
+    </div>
+  </div>`,
+};
+
+SC[10] = {
+  kick: '10단계 · 제출', h: '제출 글도 <em>초안은 클로드 코드</em>가.',
+  p: '구글폼 칸에 넣을 글을 대본·명세서에서 뽑아 초안으로 받고, 연락처·동의 칸과 제출 버튼은 내가 직접 했습니다.',
+  title: '제출 폼 글.txt (초안)', tag: ['실제 내용', 1],
+  html: () => `<div class="cols c2">
+    <div class="card" style="align-self:start">
+      <div class="lab o">${chip('cc')}작품 소개 초안</div>
+      <p class="mid">5월 10일 구글도구 활용 연수에서 배운 '내 지도 → 구글 어스 슬라이드쇼'를 6학년 사회·도덕·국어 15차시 '배리어프리 세계 여행 설계 프로젝트'로 옮긴 이야기입니다. 아이들은 제미나이로 만든 휠체어 타는 여행 친구 '민우'와 함께 런던·파리·오사카 여행을 계획하며, 스트리트뷰로 입구를 살피고 리뷰를 읽어 휠체어로 갈 수 있는지 확인했습니다.</p>
+      <div class="lab" style="margin-top:16px">${chip('me')}직접 적은 칸</div>
+      <p class="mid muted">연락처, 동의 체크, 제출 버튼</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="stat" style="grid-template-columns:repeat(3,1fr)"><div><b>2분 52초</b><span>완성 영상 길이</span></div><div><b>16개</b><span>장면 (Flow 클립·코드 도식·흐린 수업 사진)</span></div><div><b>7번</b><span>고쳐 만든 버전</span></div></div>
+      <div class="card"><div class="lab o">누가 무엇을 했나</div>
+        <p class="big">${chip('me')}말로 시키기, 참고 영상·곡 고르기, 녹음하기, 그리고 "좀 파열음이 큰데?" 같은 말.</p>
+        <p class="big" style="margin-top:10px">${chip('cc')}자료 읽기, 글·대본 쓰기, Flow에 프롬프트 넣고 후보 고르기, 영상 붙이기·고치기.</p>
+        <p class="big" style="margin-top:10px">${chip('fl')}민우와 교실 장면 그림, 8초 영상 클립.</p></div>
+    </div>
+  </div>`,
+};
+
+// ---- 아래에 더 있으면 알림
+function moreHint() {
+  const bd = $('body'), h = $('more');
+  const upd = () => h.classList.toggle('show', bd.scrollHeight - bd.clientHeight - bd.scrollTop > 30 && innerWidth > 900);
+  bd.onscroll = upd; setTimeout(upd, 300); upd();
+}
+function moreDown() { const bd = $('body'); bd.scrollBy({ top: bd.clientHeight * .8, behavior: 'smooth' }); }
+
+// ---- 영상 구간 재생
+function clip(v, src, a, b, play) {
+  v.onloadedmetadata = null; v.ontimeupdate = null;
+  if (v.dataset.src !== src) { v.src = src; v.dataset.src = src; }
+  const go = () => { v.currentTime = a; if (play) v.play().catch(() => {}); };
+  if (v.readyState >= 1) go(); else v.onloadedmetadata = go;
+  v.ontimeupdate = () => { if (v.currentTime >= b) { v.pause(); } };
+}
+
+// ---- 효과음 (nerv-flow와 같은 소리)
+let soundOn = !/mute/.test(location.search), ac = null, noise = null, lastClick = 0;
 function actx() {
   if (!ac) {
     ac = new (window.AudioContext || window.webkitAudioContext)();
@@ -349,193 +654,65 @@ function setSoundIcon() { $('sound').innerHTML = soundOn ? ICON_ON : ICON_OFF; }
 $('sound').onclick = () => { soundOn = !soundOn; setSoundIcon(); click(); };
 setSoundIcon();
 
-// ── 배치
-let geo = null;
-function layout() {
-  const box = $('box'), W = box.clientWidth, H = box.clientHeight;
-  const padX = 28, gap = Math.max(40, W * 0.045), nw = (W - padX * 2 - gap * 4) / 5, nh = 70, rg = 24;
-  const y0 = 96, nodes = ST.map((s, i) => ({ ...s, i, x: padX + s.c * (nw + gap), y: y0 + s.r * (nh + rg), wd: nw, h: nh }));
-  const flowBot = y0 + 2 * nh + rg;
-  geo = { W, H, nodes, nw, nh, gap, flowBot, padX };
-}
-function segPath(a, b) {
-  if (a.c === b.c) { const x = a.x + 26, y1 = a.r === 0 ? a.y + a.h : a.y, y2 = b.r === 0 ? b.y + b.h : b.y; return `M${x},${y1}L${x},${y2}`; }
-  const y = a.y + a.h / 2; return `M${a.x + a.wd},${y}L${b.x},${y}`;
-}
-function loopPath() {
-  const A = geo.nodes[8], B = geo.nodes[7], x1 = A.x + 40, x2 = B.x + B.wd - 40, yt = A.y - 30;
-  return `M${x1},${A.y - 2}C${x1},${yt} ${x1},${yt} ${x1 - 16},${yt}L${x2 + 16},${yt}C${x2},${yt} ${x2},${yt} ${x2},${B.y - 2}`;
-}
-function draw() {
-  layout();
-  const svg = $('flow'); svg.innerHTML = '';
-  svg.setAttribute('viewBox', `0 0 ${geo.W} ${geo.H}`);
-  const defs = el('defs', {}, svg);
-  defs.innerHTML = `<linearGradient id="hg" x1="0" x2="1"><stop offset="0" stop-color="#ffa04d"/><stop offset="1" stop-color="#ff7a1a"/></linearGradient>
-    <linearGradient id="half" x1="0" x2="1"><stop offset=".5" stop-color="#f1ebe1"/><stop offset=".5" stop-color="#ff7a1a"/></linearGradient>
-    <radialGradient id="dotg"><stop offset="0" stop-color="rgba(255,190,120,.9)"/><stop offset="1" stop-color="rgba(255,122,26,0)"/></radialGradient>
-    <filter id="glow" x="-20%" y="-40%" width="140%" height="180%"><feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#ff7a1a" flood-opacity=".55"/></filter>
-    <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#ffa04d"/></marker>`;
-  const ch = el('g', { class: 'colh' }, svg);
-  COLS.forEach((c, ci) => { const x = geo.padX + ci * (geo.nw + geo.gap);
-    el('text', { x, y: 26, class: 'n' }, ch).textContent = 'STAGE ' + String(ci + 1).padStart(2, '0');
-    el('text', { x, y: 44, class: 't' }, ch).textContent = c;
-    if (ci < 4) el('line', { x1: x + 80, x2: x + geo.nw + geo.gap - 14, y1: 22, y2: 22 }, ch); });
-  const sk = el('g', { class: 'skel' }, svg);
-  for (let i = 0; i < 9; i++) el('path', { d: segPath(geo.nodes[i], geo.nodes[i + 1]) }, sk);
-  el('g', { id: 'tour' }, svg);
-  el('g', { id: 'loopG' }, svg);
-  const ng = el('g', { id: 'nodes' }, svg);
-  geo.nodes.forEach(n => {
-    const g = el('g', { class: 'node ' + n.w, 'data-i': n.i + 1 }, ng);
-    el('rect', { x: n.x, y: n.y, width: n.wd, height: n.h, rx: 11, class: 'bg' }, g);
-    el('text', { x: n.x + 14, y: n.y + 20, class: 'sn' }, g).textContent = 'STEP ' + String(n.i + 1).padStart(2, '0');
-    el('text', { x: n.x + 14, y: n.y + 44, class: 'lab' }, g).textContent = n.t;
-    el('text', { x: n.x + 14, y: n.y + 61, class: 'ds' }, g).textContent = geo.nw > 170 ? n.d : '';
-    const cw = n.w === 'both' ? 42 : 28, cg = el('g', { class: 'chip ' + n.w }, g);
-    el('rect', { x: n.x + geo.nw - cw - 10, y: n.y + 9, width: cw, height: 18, rx: 9 }, cg);
-    el('text', { x: n.x + geo.nw - cw / 2 - 10, y: n.y + 22, 'text-anchor': 'middle' }, cg).textContent = WTXT[n.w];
-    g.addEventListener('click', () => { click(); stopPlay(); go(n.i + 1, true); });
-  });
-  el('g', { id: 'dots' }, svg);
-}
-
-// ── 흐름 그리기
-let cur = 0, gen = 0, playing = false, scrBig = false;
-try { scrBig = localStorage.getItem('sfBig') === '1'; } catch (e) {}
-function drawLine(d, cls, dur, instant) {
-  const p = el('path', { d, class: cls }, $('tour'));
-  if (instant || reduce) return Promise.resolve(p);
-  const L = p.getTotalLength();
-  p.style.strokeDasharray = L; p.style.strokeDashoffset = L; p.getBoundingClientRect();
-  p.style.transition = `stroke-dashoffset ${dur}ms cubic-bezier(.5,0,.3,1)`;
-  requestAnimationFrame(() => p.style.strokeDashoffset = 0);
-  return new Promise(r => setTimeout(() => { p.style.strokeDasharray = ''; r(p); }, dur + 20));
-}
-function travel(d, g, dur) {
-  if (reduce) return Promise.resolve();
-  return new Promise(res => {
-    const p = el('path', { d, fill: 'none' }, $('dots')), L = p.getTotalLength();
-    const halo = el('circle', { r: 14, fill: 'url(#dotg)' }, $('dots')), dot = el('circle', { r: 4, fill: '#fff6ec' }, $('dots'));
-    const t0 = performance.now();
-    const step = now => {
-      if (g !== gen) { p.remove(); halo.remove(); dot.remove(); return res(); }
-      const k = Math.min(1, (now - t0) / dur), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2, pt = p.getPointAtLength(L * e);
-      [halo, dot].forEach(c => { c.setAttribute('cx', pt.x); c.setAttribute('cy', pt.y); });
-      if (k < 1) requestAnimationFrame(step); else { p.remove(); halo.remove(); dot.remove(); res(); }
-    };
-    requestAnimationFrame(step);
-  });
-}
-function setNodes(n) {
-  document.querySelectorAll('#nodes .node').forEach(g => { const i = +g.dataset.i; g.classList.toggle('done', i < n); g.classList.toggle('on', i === n); });
-}
-function showLoop(animate) {
-  const g = $('loopG'); g.innerHTML = '';
-  const d = loopPath(), A = geo.nodes[8], B = geo.nodes[7];
-  const p = el('path', { d, class: 'loop', 'marker-end': 'url(#arr)' }, g);
-  const mx = (A.x + 40 + B.x + B.wd - 40) / 2, yt = A.y - 30;
-  el('rect', { x: mx - 66, y: yt - 11, width: 132, height: 22, rx: 6, class: 'loopbg' }, g);
-  el('text', { x: mx, y: yt + 5, 'text-anchor': 'middle', class: 'loopl' }, g).textContent = '마음에 안 들면 다시';
-  if (animate && !reduce) { g.style.opacity = 0; g.style.transition = 'opacity .6s'; requestAnimationFrame(() => g.style.opacity = 1); }
-}
-const BW = 760, BH = 330;
-function showScreen(n, instant) {
-  const old = $('scrFo'); if (old) old.remove();
-  const S = SC[n]; if (!S) return;
-  const svg = $('flow'), top = geo.flowBot + 22;
-  const k = scrBig ? Math.min((geo.W - 52) / BW, (geo.H - 40) / BH) : Math.min((geo.W - 52) / BW, (geo.H - top - 18) / BH);
-  const w = BW * k, h = BH * k, x = (geo.W - w) / 2, y = scrBig ? (geo.H - h) / 2 : top + Math.max(0, (geo.H - top - 18 - h) / 2);
-  svg.classList.toggle('big', scrBig);
-  const fo = el('foreignObject', { x, y, width: w, height: h, id: 'scrFo' }, svg);
-  fo.innerHTML = `<div xmlns="http://www.w3.org/1999/xhtml" class="scr${S.light ? '' : ' term'}${instant ? ' now' : ''}" style="width:${BW}px;height:${BH}px;zoom:${k}"><div class="scrb"><i></i><i></i><i></i><span>STEP ${String(n).padStart(2, '0')} · ${S.title}</span><em>${S.tag}</em><button class="sz" type="button">${scrBig ? '작게 ↘' : '크게 ↗'}</button></div><div class="scrc">${S.body}</div></div>`;
-  fo.querySelector('.sz').addEventListener('click', e => { e.stopPropagation(); click(); scrBig = !scrBig; try { localStorage.setItem('sfBig', scrBig ? '1' : '0'); } catch (er) {} showScreen(n, true); });
-  const wv = fo.querySelector('#wave');
-  if (wv) { let s = 7, h2 = ''; for (let i = 0; i < 140; i++) { s = (s * 9301 + 49297) % 233280; const r = s / 233280, gapz = (i % 23) > 19, a = gapz ? 2 : 6 + r * 26 * (0.6 + 0.4 * Math.sin(i / 7)); h2 += `<rect x="${i * 5}" y="${35 - a}" width="3" height="${a * 2}" rx="1.5" fill="${gapz ? '#3a3a40' : '#ff7a1a'}" opacity="${gapz ? 1 : .55 + r * .45}"/>`; }
-    wv.innerHTML = h2 + '<text x="700" y="68" text-anchor="end" font-size="10" fill="#8a8478">내 녹음 (모양은 재현)</text>'; }
-}
-function hideScreen() { const f = $('scrFo'); if (f) f.remove(); $('flow').classList.remove('big'); }
-
-function renderTop(n) {
-  const t = n === 0 ? TOP0 : { ck: 'STEP ' + String(n).padStart(2, '0') + ' · ' + ST[n - 1].t, h: SC[n].h, sub: SC[n].sub };
-  $('top').innerHTML = `<div class="fade"><div class="ck">${t.ck}</div><h2>${t.h}<span class="sub">${t.sub}</span></h2></div>`;
-}
-function renderIntro(n) {
-  const it = $('intro');
-  if (n !== 0) { it.innerHTML = ''; return; }
-  it.style.top = (geo.flowBot + 10) + 'px'; it.style.bottom = '0px';
-  it.innerHTML = `<div class="fade" style="display:flex;flex-direction:column;align-items:center;gap:18px">
-    <div class="lg"><span><i style="background:var(--ink)"></i>내가 한 일</span><span><i style="background:var(--or)"></i>AI가 한 일</span><span><i style="background:linear-gradient(90deg,var(--ink) 50%,var(--or) 50%)"></i>같이</span></div>
-    <div class="nums"><div><b>4일</b><span>공문 찾기 → 제출</span></div><div><b>10단계</b><span>내가 4 · AI 2 · 같이 4</span></div><div><b>7판</b><span>고치고 또 고침</span></div></div>
-    <button id="startBtn">순서대로 보기 ▶</button></div>`;
-  $('startBtn').onclick = () => { click(); startPlay(); };
-}
-function renderNav(n) {
-  [...$('chips').children].forEach((b, i) => { b.classList.toggle('on', i === n); b.classList.toggle('done', i < n); });
-  $('prev').disabled = n === 0;
-  $('main').innerHTML = playing ? '멈춤 ❚❚' : n === 0 ? '순서대로 보기 ▶' : n === 10 ? '처음으로 ↺' : `다음: ${ST[n].t} ›`;
-}
-
-async function go(n, animate) {
-  n = Math.max(0, Math.min(10, n));
-  const g = ++gen;
-  document.querySelectorAll('#flow video').forEach(v => v.pause());
-  cur = n; renderTop(n); renderNav(n); renderIntro(n); hideScreen();
-  $('tour').innerHTML = ''; $('dots').innerHTML = ''; $('loopG').innerHTML = '';
-  const N = geo.nodes;
-  for (let i = 1; i < n - 1; i++) drawLine(segPath(N[i - 1], N[i]), 'tp old', 0, true);
-  if (n >= 2) {
-    setNodes(n - 1);
-    const d = segPath(N[n - 2], N[n - 1]);
-    if (animate) { await Promise.all([drawLine(d, 'tp', 750), travel(d, g, 750)]); if (g !== gen) return; }
-    else drawLine(d, 'tp', 0, true);
-  }
-  setNodes(n);
-  if (n >= 1) { if (animate) tick(520 + n * 30); }
-  if (n >= 9) showLoop(animate && n === 9);
-  if (n >= 1) { if (animate) await sleep(250); if (g !== gen) return; showScreen(n, !animate); }
-  try { history.replaceState(null, '', n ? '#' + n : location.pathname + location.search); } catch (e) {}
-}
-
-async function startPlay() {
-  playing = true; let n = cur === 10 || cur === 0 ? 1 : cur + 1;
-  const myGen = () => gen;
-  while (playing && n <= 10) {
-    await go(n, true); const g = myGen();
-    renderNav(cur);
-    await sleep(n === 9 ? 6500 : 5500);
-    if (!playing || g !== gen) return;
-    n++;
-  }
-  playing = false; renderNav(cur);
-}
-function stopPlay() { playing = false; renderNav(cur); }
-
-$('main').onclick = () => { click(); if (playing) return stopPlay(); if (cur === 0) return startPlay(); if (cur === 10) return go(0); go(cur + 1, true); };
-$('prev').onclick = () => { click(); stopPlay(); go(cur - 1, false); };
-['시작'].concat(ST.map((_, i) => String(i + 1).padStart(2, '0'))).forEach((t, i) => {
-  const b = document.createElement('button'); b.textContent = t;
-  b.onclick = () => { click(); stopPlay(); go(i, true); }; $('chips').appendChild(b);
+// ---- 단계 줄 만들기
+const strip = $('strip');
+ST.forEach((s, i) => {
+  const b = document.createElement('button');
+  b.className = 'st'; b.dataset.w = s.w.length === 1 && s.w[0] === 'me' ? '나' : '';
+  b.innerHTML = `<span class="ws">${s.w.map(k => `<span class="w ${k}">${SHORT[k]}</span>`).join('')}</span><span class="n">${i + 1}단계</span><span class="t">${s.t}</span>`;
+  b.onclick = () => { click(); go(i + 1); };
+  strip.appendChild(b);
 });
+const dots = $('dots');
+['전체'].concat(ST.map((_, i) => String(i + 1).padStart(2, '0'))).forEach((t, i) => {
+  const b = document.createElement('button'); b.textContent = t; b.onclick = () => { click(); go(i); }; dots.appendChild(b);
+});
+function drawLoop() {
+  const sb = strip.getBoundingClientRect(), bs = strip.querySelectorAll('.st');
+  const a = bs[8].getBoundingClientRect(), c = bs[7].getBoundingClientRect();
+  const x1 = a.left - sb.left + a.width / 2, x2 = c.left - sb.left + c.width / 2, y = a.bottom - sb.top;
+  $('loop').setAttribute('width', sb.width); $('loop').setAttribute('height', sb.height);
+  $('loopP').setAttribute('d', `M${x1},${y + 2} C${x1},${y + 24} ${x2},${y + 24} ${x2},${y + 4}`);
+  $('loopT').setAttribute('x', (x1 + x2) / 2); $('loopT').setAttribute('y', y + 30);
+}
+
+// ---- 화면 바꾸기
+let cur = -1;
+function go(n) {
+  n = Math.max(0, Math.min(10, n));
+  document.querySelectorAll('video').forEach(v => v.pause());
+  const s = SC[n];
+  $('top').innerHTML = `<div class="fade"><div class="kick">${s.kick}</div><h2>${s.h}</h2><p>${s.p}</p></div>`;
+  $('btitle').textContent = s.title;
+  $('btag').textContent = s.tag[0]; $('btag').className = 'tag' + (s.tag[1] ? ' real' : '');
+  $('body').innerHTML = `<div class="fade" style="height:100%">${s.html()}</div>`;
+  $('body').scrollTop = 0;
+  moreHint();
+  strip.querySelectorAll('.st').forEach((b, i) => { b.classList.toggle('on', i + 1 === n); b.classList.toggle('done', i + 1 < n); });
+  dots.querySelectorAll('button').forEach((b, i) => { b.classList.toggle('on', i === n); b.classList.toggle('done', i < n); });
+  $('loop').classList.toggle('show', n === 9);
+  $('prev').disabled = n === 0;
+  $('next').innerHTML = n === 0 ? '1단계부터 보기 <span>›</span>' : n === 10 ? '끝' : `다음: ${ST[n].t} <span>›</span>`;
+  $('next').disabled = n === 10;
+  if (n > 0 && n !== cur) tick(520 + n * 28);
+  cur = n;
+  if (s.on) s.on();
+  try { history.replaceState(null, '', '#' + n); } catch (e) {}
+}
+$('next').onclick = () => { click(); go(cur + 1); };
+$('prev').onclick = () => { click(); go(cur - 1); };
 addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight') { stopPlay(); go(cur + 1, true); }
-  else if (e.key === 'ArrowLeft') { stopPlay(); go(cur - 1, false); }
+  if (e.target.tagName === 'INPUT') return;
+  if (['ArrowRight', 'PageDown'].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+  else if (['ArrowLeft', 'PageUp'].includes(e.key)) { e.preventDefault(); go(cur - 1); }
   else if (e.key === 'f' || e.key === 'F') toggleFull();
 });
 function toggleFull() { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen().catch(() => {}); }
 $('full').onclick = toggleFull;
-function showCover(on) {
-  $('cover').classList.toggle('off', !on);
-  if (!on) try { $('yt').contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo', args: [] }), '*'); } catch (e) {}
-}
-$('coverGo').onclick = () => { click(); showCover(false); };
-$('vidBtn').onclick = () => { click(); stopPlay(); showCover(true); };
-if (location.hash.slice(1)) showCover(false);
-
-let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { draw(); go(cur, false); }, 120); });
-draw();
-go(+(location.hash.slice(1)) || 0, false);
-document.fonts && document.fonts.ready.then(() => { draw(); go(cur, false); });
+addEventListener('resize', drawLoop);
+go(+(location.hash.slice(1)) || 0);
+requestAnimationFrame(drawLoop);
+document.fonts && document.fonts.ready.then(drawLoop);
 </script>
 </body>
 </html>
